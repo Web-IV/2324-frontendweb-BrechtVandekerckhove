@@ -20,13 +20,26 @@
 
 ## Projectbeschrijving
 
+**Naam applicatie**: MidnightMeals
+
 Ziekenhuismedewerkers die 's nachts werken hebben recht op een gratis maaltijd. Via de applicatie MidnightMeals kunnen deze maaltijden besteld worden. Er is keuze tussen een warme maaltijd en een broodmaaltijd.
 Bij een warme maaltijd bestaat de keuze een hoofdschotel (3 vaste keuzes + 2 suggesties die maandelijks veranderen), soep of geen soep en zuiveldessert of fruitdessert.
 Bij een broodmaaltijd bestaat de keuze uit: bruine of witte sandwiches, 5 keuzes hartig beleg, 5 keuzes zoet beleg, al dan niet vetstof, al dan niet soep, zuivel- of fruitdessert.
 Een medewerker kan slechts 1 maaltijd per shift bestellen, leverdatum van een maaltijd moet dus uniek zijn.
 
-**ERD**:  
-![ERD](./ERD/ERD.png "ERD")
+**ERD:**  
+![ERD](./ERD/ERDv3.png "ERD")  
+
+**Mapping:**
+
+**Medewerker** (<ins>id</ins>, naam, voornaam, dienst)  
+**Bestelling** (<ins>bestellingsnr</ins>, besteldatum, medewerkersId)  
+IR: vreemde sleutel _medewerkersId_ verwijst naar _id_ uit _Medewerker_, is verplicht  
+**Maaltijd** (<ins>id</ins>, type, leverdatum, hoofdschotel, soep, dessert, typeSandwiches, hartigBeleg, zoetBeleg, vetstof, suggestieVanDeMaandId, bestellingsnr)  
+IR: vreemde sleutel _suggestieVanDeMaandId_ verwijst naar _id_ uit _SuggestieVanDeMaand_, is optioneel  
+IR: vreemde sleutel _bestellingsnr_ verwijst naar _bestellingsnr_ uit _Bestelling_, is optioneel   
+**SuggestieVanDeMaand** (<ins>id</ins>, maand, vegie, omschrijving)
+
 
 ## Screenshots
 
