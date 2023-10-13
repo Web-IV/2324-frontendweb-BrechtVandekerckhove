@@ -6,6 +6,7 @@ export default function BroodMaaltijd({
   hartigBeleg,
   zoetBeleg,
   vetstof,
+  bestellingsnr,
 }) {
   return (
     <>

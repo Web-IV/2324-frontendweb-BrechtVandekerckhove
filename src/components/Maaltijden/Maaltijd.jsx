@@ -12,7 +12,8 @@ export default function Maaltijd({
   hartigBeleg,
   zoetBeleg,
   vetstof,
-  suggestieVanDeMaand,
+  suggestieVanDeMaandId,
+  bestellingsnr,
 }) {
   const isWarmeMaaltijd = type == "warmeMaaltijd";
 
@@ -29,7 +30,8 @@ export default function Maaltijd({
           hoofdschotel={hoofdschotel}
           soep={soep}
           dessert={dessert}
-          suggestieVanDeMaand={suggestieVanDeMaand}
+          suggestieVanDeMaandId={suggestieVanDeMaandId}
+          bestellingsnr={bestellingsnr}
         />
       </tbody>
       <tfoot>
@@ -54,6 +56,7 @@ export default function Maaltijd({
           hartigBeleg={hartigBeleg}
           zoetBeleg={zoetBeleg}
           vetstof={vetstof}
+          bestellingsnr={bestellingsnr}
         />
       </tbody>
       <tfoot>

@@ -3,16 +3,17 @@ export default function WarmeMaaltijd({
   hoofdschotel,
   soep,
   dessert,
-  suggestieVanDeMaand,
+  suggestieVanDeMaandId,
+  bestellingsnr,
 }) {
   return (
     <>
       <tr>
         <td>Hoofdschotel: {hoofdschotel}</td>
       </tr>
-      {suggestieVanDeMaand ? (
+      {suggestieVanDeMaandId ? (
         <tr>
-          <td>{hoofdschotel}: {suggestieVanDeMaand}</td>
+          <td>{hoofdschotel}: {suggestieVanDeMaandId}</td>
         </tr>
       ) : null}
       <tr>
