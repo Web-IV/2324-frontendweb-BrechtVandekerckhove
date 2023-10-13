@@ -11,13 +11,13 @@ export default function WarmeMaaltijd({
       <tr>
         <td>Hoofdschotel: {hoofdschotel}</td>
       </tr>
-      {suggestieVanDeMaandId ? (
+      {suggestieVanDeMaandId? (
         <tr>
           <td>{hoofdschotel}: {suggestieVanDeMaandId}</td>
         </tr>
       ) : null}
       <tr>
-        <td>Soep: {soep}</td>
+        <td>Soep: {soep? "ja":"nee"}</td>
       </tr>
       <tr>
         <td>Dessert: {dessert}</td>

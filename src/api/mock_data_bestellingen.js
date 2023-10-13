@@ -1,0 +1,81 @@
+
+export const BESTELLINGEN = [
+  {
+    bestellingsnr: 10,
+    besteldatum: "2023-10-01T00:00:00.000Z",
+    medewerker: {
+      id: 1,
+      naam: "Vandekerckhove",
+      voornaam: "Brecht",
+      dienst: "L24u",
+    },
+    maaltijden: [
+      {
+        id: 1,
+        type: "warmeMaaltijd",
+        leverdatum: "2023-10-07T00:00:00.000Z",
+        hoofdschotel: "lasagne",
+        soep: true,
+        dessert: "zuivel",
+        typeSandwiches: null,
+        hartigBeleg: null,
+        zoetBeleg: null,
+        vetstof: null,
+        suggestieVanDeMaandId: null,
+      },
+      {
+        id: 2,
+        type: "broodMaaltijd",
+        leverdatum: "2023-10-08T00:00:00.000Z",
+        hoofdschotel: null,
+        typeSandwiches: "bruin",
+        hartigBeleg: "hesp",
+        zoetBeleg: "choco",
+        vetstof: true,
+        soep: false,
+        dessert: "fruit",
+        suggestieVanDeMaandId: null,
+      },
+    ],
+  },
+  {
+    bestellingsnr: 20,
+    besteldatum: "2023-10-03T00:00:00.000Z",
+    medewerker: {
+      id: 2,
+      naam: "Balcaen",
+      voornaam: "Melissa",
+      dienst: "L24u",
+    },
+    maaltijden: [
+      {
+        id: 3,
+        type: "warmeMaaltijd",
+        leverdatum: "2023-10-07T00:00:00.000Z",
+        hoofdschotel: "suggestie",
+        soep: true,
+        dessert: "fruit",
+        typeSandwiches: null,
+        hartigBeleg: null,
+        zoetBeleg: null,
+        vetstof: null,
+        suggestieVanDeMaandId:"1",
+      },
+      {
+        id: 4,
+        type: "broodMaaltijd",
+        leverdatum: "2023-10-09T00:00:00.000Z",
+        hoofdschotel: null,
+        typeSandwiches: "wit",
+        hartigBeleg: "kaas",
+        zoetBeleg: "speculoos",
+        vetstof: false,
+        soep: true,
+        dessert: "zuivel",
+        suggestieVanDeMaandId: null,
+      },
+    ],
+  },
+];
+
+export default BESTELLINGEN;

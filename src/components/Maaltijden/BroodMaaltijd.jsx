@@ -20,10 +20,10 @@ export default function BroodMaaltijd({
         <td>Zoet beleg: {zoetBeleg}</td>
       </tr>
       <tr>
-        <td>Vetstof: {vetstof}</td>
+        <td>Vetstof: {vetstof ? "ja" : "nee"}</td>
       </tr>
       <tr>
-        <td>Soep: {soep}</td>
+        <td>Soep: {soep ? "ja" : "nee"}</td>
       </tr>
       <tr>
         <td>Dessert: {dessert}</td>

@@ -15,7 +15,7 @@ export default function Bestelling({ bestellingsnr, besteldatum, maaltijden }) {
         {maaltijden.map((maaltijd) => (
           <tr>
             <td>
-              <Maaltijd key={maaltijd.id} {...maaltijd} />
+              <Maaltijd  {...maaltijd} />
             </td>
           </tr>
         ))}
