@@ -1,10 +1,19 @@
 import React from "react";
-import { Button } from "antd";
+import Maaltijd from "./components/Maaltijden/Maaltijd";
 
-const App = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-);
-
+function App() {
+  return (
+    <Maaltijd
+    id="1"
+    type="Broodmaaltijd"
+    soep="Tomatensoep"
+    dessert="Chocoladepudding"
+    typeSandwiches="Wit"
+    hartigBeleg="Kaas"
+    zoetBeleg="Choco"
+    vetstof="Ja"
+    leverdatum={new Date().toLocaleDateString()}
+    />
+  );
+}
 export default App;
