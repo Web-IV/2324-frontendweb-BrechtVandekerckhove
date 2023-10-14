@@ -5,9 +5,7 @@ import BESTELLINGEN from "./api/mock_data_bestellingen";
 import SUGGESTIES from "./api/mock_data_suggesties";
 import Bestelling from "./components/Bestellingen/Bestelling";
 import SuggestieVanDeMaand from "./components/SuggestieVanDeMaand";
-import BroodMaaltijd from "./components/Maaltijden/BroodMaaltijd";
-import BroodMaaltijdFormulier from "./components/Formulieren/BroodMaaltijdFormulier";
-
+import BroodMaaltijdFormulier from "./components/Formulieren/BroodMaaltijdFormulier"; 
 function App() {
   return (
     <>
