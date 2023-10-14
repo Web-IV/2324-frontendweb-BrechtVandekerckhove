@@ -1,5 +1,6 @@
-import { Formik, Form, useField } from "formik";
-import { Select, SubmitButton } from "formik-antd";
+import { Formik, Form, useField} from "formik";
+import { Select, SubmitButton,DatePicker } from "formik-antd";
+import { Space } from "antd";
 import {
   soep,
   hartigBeleg,
@@ -18,7 +19,7 @@ const MySelect = ({ label, ...props }) => {
         <label htmlFor={props.id || props.name}>{label}</label>
       </div>
       <div>
-        <Select {...field} {...props}      style={{ width: 155 }}></Select>
+        <Select {...field} {...props} style={{ width: 155 }}></Select>
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
@@ -46,44 +47,26 @@ export default function BroodMaaltijdFormulier() {
         }}
       >
         <Form>
+        <Space direction="vertical" size="small">
+          <MySelect label="Soep: " name="soep" options={soep} />
           <MySelect
-        
-            label="Soep: "
-            name="soep"
-            options={soep}
-          />
-          <MySelect
-      
             label="Sandwiches: "
             name="sandwiches"
             options={sandwiches}
           />
           <MySelect
-       
             label="Hartig beleg: "
             name="hartigBeleg"
             options={hartigBeleg}
           />
-          <MySelect
-   
-            label="Zoet beleg: "
-            name="zoetBeleg"
-            options={zoetBeleg}
-          />
-          <MySelect
-    
-            label="Vetstof: "
-            name="vetstof"
-            options={vetstof}
-          />
-          <MySelect
-     
-            label="Dessert: "
-            name="dessert"
-            options={dessert}
-          />
-
+          <MySelect label="Zoet beleg: " name="zoetBeleg" options={zoetBeleg} />
+          <MySelect label="Vetstof: " name="vetstof" options={vetstof} />
+          <MySelect label="Dessert: " name="dessert" options={dessert} />
+          <label>Leverdatum:{" "}
+          <DatePicker name="leverdatum" />
+          </label> 
           <SubmitButton>Bestellen</SubmitButton>
+          </Space>
         </Form>
       </Formik>
     </>
