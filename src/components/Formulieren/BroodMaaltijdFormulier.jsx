@@ -1,74 +1,106 @@
-import { Formik, Form, useField} from "formik";
-import { Select, SubmitButton,DatePicker } from "formik-antd";
-import { Space } from "antd";
+import { Formik, Form, useField } from "formik";
+import { Select, FormItem, SubmitButton, DatePicker } from "formik-antd";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 import {
-  soep,
-  hartigBeleg,
-  sandwiches,
-  zoetBeleg,
-  dessert,
-  vetstof,
-} from "../../data/data_keuze_formulieren.js";
+  hartigBelegOpties,
+  sandwichesOpties,
+  zoetBelegOpties,
+  dessertOpties,
+  vetstofOpties,
+  soepOpties,
+} from "../../data/opties_maaltijdedformulieren.js";
+import * as Yup from "yup";
 
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
     <>
-      <div>
-        <label htmlFor={props.id || props.name}>{label}</label>
-      </div>
-      <div>
-        <Select {...field} {...props} style={{ width: 155 }}></Select>
-        {meta.touched && meta.error ? (
-          <div className="error">{meta.error}</div>
-        ) : null}
-      </div>
+      <FormItem name={label} label={label} style={{ marginBottom: "10px" }}>
+        <Select {...field} {...props}></Select>
+      </FormItem>
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
     </>
   );
 };
+
+const disabledDate = (current) => {
+  const dagenInVerledenEnVandaag = current < dayjs().endOf("day");
+  //hier dynamisch instellen
+  const dagenReedsBestelling = [dayjs("2023-10-20"), dayjs("2023-10-24")];
+
+  return (
+    (current && dagenInVerledenEnVandaag) ||
+    dagenReedsBestelling.some((date) => current.isSame(date, "day"))
+  );
+};
+
+const validation = Yup.object().shape({
+  leverdatum: Yup.date().required("Leverdatum is verplicht"),
+});
+
 export default function BroodMaaltijdFormulier() {
   return (
-    <>
+    <div
+      style={{
+        marginTop: 80,
+        maxWidth: 300,
+        marginRight: "auto",
+      }}
+    >
       <Formik
         initialValues={{
-          soep: "soep",
-          sandwiches: sandwiches[0].value,
-          hartigBeleg: hartigBeleg[0].value,
-          zoetBeleg: zoetBeleg[0].value,
-          vetstof: "vetstof",
-          dessert: dessert[0].value,
+          soep: soepOpties[0].value,
+          sandwiches: sandwichesOpties[0].value,
+          hartigBeleg: hartigBelegOpties[0].value,
+          zoetBeleg: zoetBelegOpties[0].value,
+          vetstof: vetstofOpties[0].value,
+          dessert: dessertOpties[0].value,
+          leverdatum: "",
         }}
+        validationSchema={validation}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            console.log("Form values:", values);
             setSubmitting(false);
-          }, 400);
+          }, 300);
         }}
       >
         <Form>
-        <Space direction="vertical" size="small">
-          <MySelect label="Soep: " name="soep" options={soep} />
+          <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect
-            label="Sandwiches: "
+            label="Sandwiches"
             name="sandwiches"
-            options={sandwiches}
+            options={sandwichesOpties}
           />
           <MySelect
-            label="Hartig beleg: "
+            label="Hartig beleg"
             name="hartigBeleg"
-            options={hartigBeleg}
+            options={hartigBelegOpties}
           />
-          <MySelect label="Zoet beleg: " name="zoetBeleg" options={zoetBeleg} />
-          <MySelect label="Vetstof: " name="vetstof" options={vetstof} />
-          <MySelect label="Dessert: " name="dessert" options={dessert} />
-          <label>Leverdatum:{" "}
-          <DatePicker name="leverdatum" />
-          </label> 
-          <SubmitButton>Bestellen</SubmitButton>
-          </Space>
+          <MySelect
+            label="Zoet beleg"
+            name="zoetBeleg"
+            options={zoetBelegOpties}
+          />
+          <MySelect label="Vetstof" name="vetstof" options={vetstofOpties} />
+          <MySelect label="Dessert" name="dessert" options={dessertOpties} />
+          <FormItem name="leverdatum" label="Leverdatum">
+            <DatePicker
+              name="leverdatum"
+              format="DD-MM-YYYY"
+              disabledDate={disabledDate}
+              placeholder="Selecteer een datum"
+              style={{ width: "100%" }}
+            />
+          </FormItem>
+          <SubmitButton disabled={false}>Bestellen</SubmitButton>
         </Form>
       </Formik>
-    </>
+    </div>
   );
 }

@@ -5,7 +5,9 @@ import BESTELLINGEN from "./api/mock_data_bestellingen";
 import SUGGESTIES from "./api/mock_data_suggesties";
 import Bestelling from "./components/Bestellingen/Bestelling";
 import SuggestieVanDeMaand from "./components/SuggestieVanDeMaand";
-import BroodMaaltijdFormulier from "./components/Formulieren/BroodMaaltijdFormulier"; 
+import BroodMaaltijdFormulier from "./components/Formulieren/BroodmaaltijdFormulier";
+import WarmeMaaltijdFormulier from  "./components/Formulieren/WarmeMaaltijdFormulier"
+import BroodMaaltijd from "./components/Maaltijden/BroodMaaltijd";
 function App() {
   return (
     <>
@@ -23,7 +25,8 @@ function App() {
         <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
       ))}
       <h1>Formulieren</h1>
-      <BroodMaaltijdFormulier />
+      <BroodMaaltijdFormulier/>
+      <WarmeMaaltijdFormulier/>
     </>
   );
 }

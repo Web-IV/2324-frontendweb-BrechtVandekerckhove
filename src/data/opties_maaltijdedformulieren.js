@@ -1,4 +1,4 @@
-export const soep = [
+export const soepOpties= [
   {
     value: "soep",
     label: "soep",
@@ -9,29 +9,29 @@ export const soep = [
   },
 ];
 
-export const sandwiches = [
+export const sandwichesOpties = [
   { value: "wit", label: "wit" },
   { value: "bruin", label: "bruin" },
 ];
-export const hartigBeleg = [
+export const hartigBelegOpties = [
   { value: "jonge kaas", label: "jonge kaas" },
   { value: "salami", label: "salami" },
   { value: "gekookte ham", label: "gekookte ham" },
   { value: "surimisalada", label: "surimisalada" },
   { value: "vegetarische salade", label: "vegetarische salade" },
 ];
-export const zoetBeleg = [
+export const zoetBelegOpties= [
   { value: "confituur", label: "confituur" },
   { value: "peperkoek", label: "peperkoek" },
   { value: "choco", label: "choco" },
   { value: "speculoospasta", label: "speculoospasta" },
   { value: "honing", label: "honing" },
 ];
-export const dessert = [
+export const dessertOpties = [
   { value: "zuivel", label: "zuivel" },
   { value: "fruit", label: "fruit" },
 ];
-export const hoofdschotel = [
+export const hoofdschotelOpties = [
   { value: "vol-au-vent", label: "vol-au-vent" },
   { value: "pasta bolognaise", label: "pasta bolognaise" },
   { value: "vegetarische pasta", label: "vegetarische pasta" },
@@ -39,7 +39,7 @@ export const hoofdschotel = [
   { value: "vegetarische suggestie", label: "vegetarische suggestie" },
 ];
 
-export const vetstof = [
+export const vetstofOpties= [
   {
     value: "vetstof",
     label: "vetstof",
