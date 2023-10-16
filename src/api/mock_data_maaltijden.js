@@ -1,7 +1,6 @@
-
 const MAALTIJDEN = [
   {
-    id: 1,
+    id: 99,
     type: "warmeMaaltijd",
     leverdatum: "2023-10-07T00:00:00.000Z",
     hoofdschotel: "lasagne",
@@ -14,7 +13,7 @@ const MAALTIJDEN = [
     suggestieVanDeMaandId: null,
   },
   {
-    id: 2,
+    id: 100,
     type: "broodMaaltijd",
     leverdatum: "2023-10-08T00:00:00.000Z",
     hoofdschotel: null,
@@ -25,8 +24,9 @@ const MAALTIJDEN = [
     soep: false,
     dessert: "fruit",
     suggestieVanDeMaandId: null,
-  },     {
-    id: 3,
+  },
+  {
+    id: 101,
     type: "warmeMaaltijd",
     leverdatum: "2023-10-07T00:00:00.000Z",
     hoofdschotel: "suggestie",
@@ -39,7 +39,7 @@ const MAALTIJDEN = [
     suggestieVanDeMaandId: 1,
   },
   {
-    id: 4,
+    id: 102,
     type: "broodMaaltijd",
     leverdatum: "2023-10-09T00:00:00.000Z",
     hoofdschotel: null,
@@ -52,7 +52,5 @@ const MAALTIJDEN = [
     suggestieVanDeMaandId: null,
   },
 ];
-
-
 
 export default MAALTIJDEN;

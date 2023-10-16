@@ -1,6 +1,17 @@
 import Maaltijd from "../Maaltijden/Maaltijd";
+import { useCallback } from "react";
+import { Button, Modal } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+export default function Bestelling({
+  bestellingsnr,
+  besteldatum,
+  maaltijden,
+  onDelete,
+}) {
+  const handleDelete = useCallback(() => {
+    onDelete(bestellingsnr);
+  }, [bestellingsnr, onDelete]);
 
-export default function Bestelling({ bestellingsnr, besteldatum, maaltijden }) {
   return (
     <table>
       <thead>
@@ -9,13 +20,19 @@ export default function Bestelling({ bestellingsnr, besteldatum, maaltijden }) {
         </tr>
         <tr>
           <td>Besteldatum: {besteldatum}</td>
+          <td>
+            <Button danger onClick={handleDelete}>
+              <DeleteOutlined />
+              verwijder bestelling
+            </Button>
+          </td>
         </tr>
       </thead>
       <tbody>
         {maaltijden.map((maaltijd) => (
           <tr>
             <td>
-              <Maaltijd  {...maaltijd} />
+              <Maaltijd {...maaltijd} />
             </td>
           </tr>
         ))}

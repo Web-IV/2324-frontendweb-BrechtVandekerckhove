@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Maaltijd from "./components/Maaltijden/Maaltijd";
 import MAALTIJDEN from "./api/mock_data_maaltijden";
-import BESTELLINGEN from "./api/mock_data_bestellingen";
 import SUGGESTIES from "./api/mock_data_suggesties";
 import Bestelling from "./components/Bestellingen/Bestelling";
 import SuggestieVanDeMaand from "./components/SuggestieVanDeMaand";
 import BroodMaaltijdFormulier from "./components/Formulieren/BroodmaaltijdFormulier";
-import WarmeMaaltijdFormulier from  "./components/Formulieren/WarmeMaaltijdFormulier"
-import BroodMaaltijd from "./components/Maaltijden/BroodMaaltijd";
+import WarmeMaaltijdFormulier from "./components/Formulieren/WarmeMaaltijdFormulier";
+import Bestellinglijst from "./components/Bestellingen/Bestellinglijst";
+
 function App() {
   return (
     <>
@@ -15,18 +15,15 @@ function App() {
       {MAALTIJDEN.map((maaltijd) => (
         <Maaltijd key={maaltijd.id} {...maaltijd} />
       ))}
-      <h1>Bestellingen</h1>
-      {BESTELLINGEN.map((bestelling) => (
-        <Bestelling key={bestelling.bestellingsnr} {...bestelling} />
-      ))}
+      <Bestellinglijst />
 
       <h1>Suggesties</h1>
       {SUGGESTIES.map((suggestie) => (
         <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
       ))}
       <h1>Formulieren</h1>
-      <BroodMaaltijdFormulier/>
-      <WarmeMaaltijdFormulier/>
+      <BroodMaaltijdFormulier />
+      <WarmeMaaltijdFormulier />
     </>
   );
 }
