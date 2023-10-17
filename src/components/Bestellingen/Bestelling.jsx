@@ -1,9 +1,17 @@
 import Maaltijd from "../Maaltijden/Maaltijd";
 import { useCallback } from "react";
-import { Button, Modal } from "antd";
+import { Button, Modal, Table } from "antd";
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
 const { confirm } = Modal;
+
+export const dateConverter = (date) => {
+  if (!date) return null;
+  if (typeof date !== Object) {
+    date = new Date(date);
+  }
+  return date.toLocaleDateString();
+};
 
 export default function Bestelling({
   bestellingsnr,
@@ -18,7 +26,7 @@ export default function Bestelling({
   const showDeleteConfirm = useCallback(() => {
     confirm({
       title: "Ben je zeker dat je deze bestelling wilt verwijderen?",
-      icon: <ExclamationCircleOutlined/>,
+      icon: <ExclamationCircleOutlined />,
       okText: "Ja",
       okType: "danger",
       cancelText: "Nee",
@@ -28,31 +36,57 @@ export default function Bestelling({
     });
   }, []);
 
+  const columns = [
+    {
+      title: `Bestelling ${bestellingsnr}`,
+      dataIndex: "bestelling",
+      key: "bestelling",
+      render: (text) => <strong>{text}</strong>,
+    },
+    {
+      title: "Besteldatum",
+      dataIndex: "besteldatum",
+      key: "besteldatum",
+    },
+    {
+      title: "",
+      dataIndex: "actions",
+      key: "actions",
+      render: () => (
+        <Button danger onClick={showDeleteConfirm}>
+          <DeleteOutlined />
+          verwijder bestelling
+        </Button>
+      ),
+    },
+  ];
+
+  const data = [
+    {
+      key: "1",
+      bestelling: `Bestelling ${bestellingsnr}`,
+      besteldatum: `Besteldatum: ` + dateConverter(besteldatum),
+      actions: "",
+    },
+  ];
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Bestelling {bestellingsnr}</th>
-        </tr>
-        <tr>
-          <td>Besteldatum: {besteldatum}</td>
-          <td>
-            <Button danger onClick={showDeleteConfirm}>
-              <DeleteOutlined />
-              verwijder bestelling
-            </Button>
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        {maaltijden.map((maaltijd) => (
-          <tr>
-            <td>
-              <Maaltijd {...maaltijd} />
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div style={{ maxWidth: "800px" }}>
+      <Table
+        columns={columns}
+        showHeader={false}
+        pagination={false}
+        dataSource={data}
+        expandable={{
+          expandedRowRender: () => (
+            <>
+              {maaltijden.map((maaltijd, index) => (
+                <Maaltijd key={index} {...maaltijd} />
+              ))}
+            </>
+          ),
+        }}
+      />
+    </div>
   );
 }

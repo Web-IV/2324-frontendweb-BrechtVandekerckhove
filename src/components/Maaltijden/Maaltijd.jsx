@@ -1,5 +1,6 @@
 import BroodMaaltijd from "./BroodMaaltijd";
 import WarmeMaaltijd from "./WarmeMaaltijd";
+import { dateConverter } from "../Bestellingen/Bestelling";
 
 export default function Maaltijd({
   id,
@@ -19,9 +20,9 @@ export default function Maaltijd({
 
   return isWarmeMaaltijd ? (
     <table>
-      <thead>
+      <thead style={{ textAlign: "left" }}>
         <tr>
-          <th>Warme maaltijd</th>
+          <th>{dateConverter(leverdatum)}: warme maaltijd</th>
         </tr>
       </thead>
       <tbody>
@@ -34,17 +35,12 @@ export default function Maaltijd({
           bestellingsnr={bestellingsnr}
         />
       </tbody>
-      <tfoot>
-        <tr>
-          <td>Leverdatum: {leverdatum}</td>
-        </tr>
-      </tfoot>
     </table>
   ) : (
     <table>
-      <thead>
+      <thead style={{ textAlign: "left" }}>
         <tr>
-          <th>Broodmaaltijd</th>
+          <th>{dateConverter(leverdatum)}: broodmaaltijd </th>
         </tr>
       </thead>
       <tbody>
@@ -59,11 +55,6 @@ export default function Maaltijd({
           bestellingsnr={bestellingsnr}
         />
       </tbody>
-      <tfoot>
-        <tr>
-          <td>Leverdatum: {leverdatum}</td>
-        </tr>
-      </tfoot>
     </table>
   );
 }

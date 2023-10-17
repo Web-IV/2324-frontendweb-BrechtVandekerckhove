@@ -7,6 +7,7 @@ import SuggestieVanDeMaand from "./components/SuggestieVanDeMaand";
 import BroodMaaltijdFormulier from "./components/Formulieren/BroodmaaltijdFormulier";
 import WarmeMaaltijdFormulier from "./components/Formulieren/WarmeMaaltijdFormulier";
 import Bestellinglijst from "./components/Bestellingen/Bestellinglijst";
+import { ConfigProvider } from "antd";
 
 function App() {
   return (
