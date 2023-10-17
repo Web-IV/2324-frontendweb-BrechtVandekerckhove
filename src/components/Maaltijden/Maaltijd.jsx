@@ -1,7 +1,7 @@
 import BroodMaaltijd from "./BroodMaaltijd";
 import WarmeMaaltijd from "./WarmeMaaltijd";
 import { dateConverter } from "../Bestellingen/Bestelling";
-
+import Layout from "antd/es/layout/layout";
 export default function Maaltijd({
   id,
   type,
@@ -19,6 +19,7 @@ export default function Maaltijd({
   const isWarmeMaaltijd = type == "warmeMaaltijd";
 
   return isWarmeMaaltijd ? (
+  
     <table>
       <thead style={{ textAlign: "left" }}>
         <tr>
@@ -36,6 +37,7 @@ export default function Maaltijd({
         />
       </tbody>
     </table>
+
   ) : (
     <table>
       <thead style={{ textAlign: "left" }}>
