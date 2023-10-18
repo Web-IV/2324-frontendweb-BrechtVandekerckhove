@@ -5,8 +5,10 @@ import BroodMaaltijdFormulier from "./components/Formulieren/BroodmaaltijdFormul
 import WarmeMaaltijdFormulier from "./components/Formulieren/WarmeMaaltijdFormulier";
 import Bestellinglijst from "./components/Bestellingen/Bestellinglijst";
 import SuggestieLijst from "./components/Suggesties/SuggestieLijst";
+import { Space, Button } from "antd";
 
 function App() {
+  const [warmeMaaltijdFormulier, setWarmeMaaltijdFormulier] = useState(true);
   return (
     <>
       <h1>Maaltijden</h1>
@@ -16,9 +18,29 @@ function App() {
       <Bestellinglijst />
 
       <SuggestieLijst />
-      <h1>Formulieren</h1>
-      <BroodMaaltijdFormulier />
-      <WarmeMaaltijdFormulier />
+      <Space size={150}>
+        <Button
+          size="large"
+          type="primary"
+          onClick={() => setWarmeMaaltijdFormulier(true)}
+        >
+          Warme maaltijd
+        </Button>
+        <Button
+          size="large"
+          type="primary"
+          onClick={() => setWarmeMaaltijdFormulier(false)}
+        >
+          Broodmaaltijd
+        </Button>
+      </Space>
+      <div>
+        {warmeMaaltijdFormulier ? (
+          <WarmeMaaltijdFormulier />
+        ) : (
+          <BroodMaaltijdFormulier />
+        )}
+      </div>
     </>
   );
 }

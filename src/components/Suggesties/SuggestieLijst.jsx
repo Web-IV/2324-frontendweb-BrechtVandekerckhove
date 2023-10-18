@@ -33,7 +33,7 @@ export default function SuggestieLijst() {
           return a - b;
         })
         .map((suggestie, index) => (
-          <>
+          <div key={suggestie.id}>
             {/*Per 2 suggesties maand weergeven*/}
             {index % 2 == 0 ? (
               <Title level={3}>
@@ -41,7 +41,7 @@ export default function SuggestieLijst() {
               </Title>
             ) : null}
             <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
-          </>
+          </div>
         ))}
     </>
   );

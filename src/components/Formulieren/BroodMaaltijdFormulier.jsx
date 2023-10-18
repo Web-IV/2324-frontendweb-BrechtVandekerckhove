@@ -15,12 +15,19 @@ import * as Yup from "yup";
 import useSWRMutation from "swr/mutation";
 import { save } from "../../api";
 import Error from "../Error";
+
+const formItemLayout = { labelCol:{span:5}, labelAlign: "left" };
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
     <>
-      <FormItem name={label} label={label} style={{ marginBottom: "10px" }}>
+      <FormItem
+        name={label}
+        label={label}
+        {...formItemLayout}
+        style={{ marginBottom: "10px" }}
+      >
         <Select {...field} {...props}></Select>
       </FormItem>
       {meta.touched && meta.error ? (
@@ -44,6 +51,8 @@ const disabledDate = (current) => {
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
 });
+
+
 
 export default function BroodMaaltijdFormulier() {
   const { trigger: saveBestelling, error: saveError } = useSWRMutation(
@@ -99,7 +108,7 @@ export default function BroodMaaltijdFormulier() {
           />
           <MySelect label="Vetstof" name="vetstof" options={vetstofOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem name="leverdatum" label="Leverdatum">
+          <FormItem name="leverdatum" label="Leverdatum"  {...formItemLayout}>
             <DatePicker
               name="leverdatum"
               format="DD-MM-YYYY"

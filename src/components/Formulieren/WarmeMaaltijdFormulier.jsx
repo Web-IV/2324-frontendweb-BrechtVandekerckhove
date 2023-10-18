@@ -13,12 +13,14 @@ import useSWRMutation from "swr/mutation";
 import { save } from "../../api";
 import Error from "../Error";
 
+const formItemLayout = { labelCol:{span:5}, labelAlign: "left" };
+
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
     <>
-      <FormItem name={label} label={label} style={{ marginBottom: "10px" }}>
+      <FormItem name={label} label={label} {...formItemLayout} style={{ marginBottom: "10px" }}>
         <Select {...field} {...props}></Select>
       </FormItem>
       {meta.touched && meta.error ? (
@@ -85,7 +87,7 @@ export default function BroodMaaltijdFormulier() {
           />
           <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem name="leverdatum" label="Leverdatum">
+          <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout} >
             <DatePicker
               name="leverdatum"
               format="DD-MM-YYYY"
