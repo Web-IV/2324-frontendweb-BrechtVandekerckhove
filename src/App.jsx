@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Maaltijd from "./components/Maaltijden/Maaltijd";
 import MAALTIJDEN from "./api/mock_data_maaltijden";
-import SUGGESTIES from "./api/mock_data_suggesties";
-import Bestelling from "./components/Bestellingen/Bestelling";
-import SuggestieVanDeMaand from "./components/SuggestieVanDeMaand";
 import BroodMaaltijdFormulier from "./components/Formulieren/BroodmaaltijdFormulier";
 import WarmeMaaltijdFormulier from "./components/Formulieren/WarmeMaaltijdFormulier";
 import Bestellinglijst from "./components/Bestellingen/Bestellinglijst";
-import { ConfigProvider } from "antd";
+import SuggestieLijst from "./components/Suggesties/SuggestieLijst";
 
 function App() {
   return (
@@ -18,10 +15,7 @@ function App() {
       ))}
       <Bestellinglijst />
 
-      <h1>Suggesties</h1>
-      {SUGGESTIES.map((suggestie) => (
-        <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
-      ))}
+      <SuggestieLijst />
       <h1>Formulieren</h1>
       <BroodMaaltijdFormulier />
       <WarmeMaaltijdFormulier />
