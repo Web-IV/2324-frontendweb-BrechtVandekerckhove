@@ -9,6 +9,9 @@ import {
   soepOpties,
 } from "../../data/opties_maaltijdedformulieren.js";
 import * as Yup from "yup";
+import useSWRMutation from "swr/mutation";
+import { save } from "../../api";
+import Error from "../Error";
 
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -41,14 +44,16 @@ const validation = Yup.object().shape({
 });
 
 export default function BroodMaaltijdFormulier() {
+  const { trigger: saveBestelling, error: saveError } = useSWRMutation(
+    "bestellingen",
+    save
+  );
+
   return (
     <div
-      style={{
-        marginTop: 80,
-        maxWidth: 300,
-        marginRight: "auto",
-      }}
+     className="maaltijdFormulier"
     >
+      <Error error={saveError} />
       <Formik
         initialValues={{
           hoofdschotel: hoofdschotelOpties[0].value,
@@ -57,11 +62,19 @@ export default function BroodMaaltijdFormulier() {
           leverdatum: "",
         }}
         validationSchema={validation}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            console.log("Form values:", values);
-            setSubmitting(false);
-          }, 300);
+        //medewerker en id maaltijd is nu hardcoded, maar moeten dynamisch worden
+        onSubmit={async (data, { setSubmitting }) => {
+          await saveBestelling({
+            medewerker: {
+              id: "5",
+              naam: "test",
+              voornaam: "test2",
+              dienst: "Labo",
+            },
+            maaltijden: [{ id: "99", type: "warmeMaaltijd", ...data }],
+          });
+          console.log("Form values:", data);
+          setSubmitting(false);
         }}
       >
         <Form>

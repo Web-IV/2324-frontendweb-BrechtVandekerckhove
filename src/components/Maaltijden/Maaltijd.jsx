@@ -1,7 +1,6 @@
 import BroodMaaltijd from "./BroodMaaltijd";
 import WarmeMaaltijd from "./WarmeMaaltijd";
 import { dateConverter } from "../Bestellingen/Bestelling";
-import Layout from "antd/es/layout/layout";
 export default function Maaltijd({
   id,
   type,

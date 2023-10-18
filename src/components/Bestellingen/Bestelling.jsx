@@ -30,6 +30,7 @@ export default function Bestelling({
       okText: "Ja",
       okType: "danger",
       cancelText: "Nee",
+      centered: true,
       onOk() {
         handleDelete();
       },

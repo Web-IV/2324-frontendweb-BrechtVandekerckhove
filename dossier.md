@@ -51,11 +51,33 @@ IR: vreemde sleutel _bestellingsnr_ verwijst naar _bestellingsnr_ uit _Bestellin
 > Maak hier een oplijsting van alle API cals in jouw applicatie. Groepeer dit per entiteit. Hieronder een voorbeeld.
 > Dit is weinig zinvol indien je enkel Front-end Web Development volgt, verwijder dan deze sectie.
 > Indien je als extra Swagger koos, dan voeg je hier een link toe naar jouw online documentatie. Swagger geeft nl. exact (en nog veel meer) wat je hieronder moet schrijven.
+### Bestelling
 
-### Gebruikers
+- Een gebruiker moet al zijn bestellingen kunnen bekijken:  
+  `GET /api/bestellingen` (gebruikersId zit in de token)
 
-- `GET /api/users`: alle gebruikers ophalen
-- `GET /api/users/:id`: gebruiker met een bepaald id ophalen
+- Een gebruiker moet zijn bestelling in detail kunnen bekijken:  
+  `GET /api/bestellingen/:bestellingsnr` (gebruikersId zit in de token)
+
+- Een gebruiker moet een winkelmandje kunnen bevestigen, bestelling dus plaatsen:  
+  `POST /api/bestellingen` (gebruikersId zit in de token)
+
+- Een gebruiker moet een bestelling kunnen verwijderen:  
+  `DELETE /api/bestellingen/:bestellingsnr` (gebruikersId zit in de token)
+
+- Een admin gebruiker moet alle bestellingen van de gebruikers kunnen bekijken:  
+  `GET /api/bestellingen/`
+
+### Maaltijd
+
+- Een gebruiker moet een maaltijd kunnen aanmaken:  
+  `POST /api/maaltijd` (gebruikersId zit in de token)
+
+- Een gebruiker moet een maaltijd kunnen toevoegen aan winkelmandje:  
+  `POST /api/winkelmandje` (gebruikersId zit in de token)
+
+- Een gebruiker moet een maaltijd kunnen verwijderen uit winkelmandje:  
+  `DELETE /api/winkelmandje/:id` (gebruikersId zit in de token)
 
 ## Behaalde minimumvereisten
 
