@@ -1,11 +1,13 @@
-import Bestelling from "./Bestelling";
-import AsyncData from "../AsyncData";
+
+import Bestelling from "../components/Bestellingen/Bestelling";
+import AsyncData from "../components/AsyncData";
 import useSWR from "swr";
-import { getAll, deleteByBestellingsnr } from "../../api";
+import { getAll, deleteByBestellingsnr } from "../api";
 import useSWRMutation from "swr/mutation";
 import { Typography } from "antd";
 
 const { Title } = Typography;
+
 
 function BestellingTabel({ bestellingen, onDelete }) {
   return bestellingen.map((bestelling) => (
@@ -17,7 +19,7 @@ function BestellingTabel({ bestellingen, onDelete }) {
   ));
 }
 
-export default function Bestellinglijst() {
+export default function BestellingOverzicht() {
   const {
     data: bestellingen = [],
     isLoading,

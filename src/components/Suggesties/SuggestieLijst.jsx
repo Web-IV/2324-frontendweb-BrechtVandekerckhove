@@ -23,7 +23,7 @@ const maandNummerOmzettenNaarMaandString = (maandNummer) => {
 export default function SuggestieLijst() {
   return (
     <>
-      <Title level={2}>Suggesties</Title>
+      <Title level={2}>Suggesties komende maanden:</Title>
       {SUGGESTIES.filter((suggestie) =>
         komendeDrieMaanden.includes(suggestie.maand)
       )

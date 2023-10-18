@@ -9,12 +9,18 @@ body {
   margin-bottom: 20px;
   padding: 30px 50px;
   text-align: center;
- background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
 .maaltijdFormulier {
   margin-top: 50px;
   max-width: 450px;
   margin-right: "auto";
-  
+}
+.blue {
+  background-color: #0269c9;
+}
+.header {
+  height: 150px;
+  line-height: 130px;
 }

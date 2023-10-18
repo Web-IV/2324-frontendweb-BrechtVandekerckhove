@@ -85,7 +85,6 @@ export default function BroodMaaltijdFormulier() {
             },
             maaltijden: [{ id: "99", type: "broodMaaltijd", ...data }],
           });
-          console.log("Form values:", data);
           setSubmitting(false);
         }}
       >
@@ -117,7 +116,7 @@ export default function BroodMaaltijdFormulier() {
               style={{ width: "100%" }}
             />
           </FormItem>
-          <SubmitButton disabled={false}>Bestellen</SubmitButton>
+          <SubmitButton disabled={false} size='large' className="blue">Voeg toe</SubmitButton>
         </Form>
       </Formik>
     </div>
