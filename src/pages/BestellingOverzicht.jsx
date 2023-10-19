@@ -11,7 +11,7 @@ const { Title } = Typography;
 
 function BestellingTabel({ bestellingen, onDelete }) {
   return bestellingen.map((bestelling) => (
-    <Bestelling
+   <Bestelling
       key={bestelling.bestellingsnr}
       onDelete={onDelete}
       {...bestelling}
@@ -29,7 +29,6 @@ export default function BestellingOverzicht() {
     "bestellingen",
     deleteByBestellingsnr
   );
-
   return (
     <>
       <Title>Bestellingen</Title>

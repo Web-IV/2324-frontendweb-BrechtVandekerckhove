@@ -9,7 +9,7 @@ const { Header, Content, Footer } = Layout;
 function App() {
   return (
     <Layout>
-      <Header className="blue header">
+      <Header className=" blue header">
         <Menu
           mode="horizontal"
           style={{ margin: "10px 0" }}
@@ -31,7 +31,7 @@ function App() {
           ]}
         />
       </Header>
-      <Content>
+      <Content className="content">
         <Outlet />
       </Content>
       <Footer></Footer>

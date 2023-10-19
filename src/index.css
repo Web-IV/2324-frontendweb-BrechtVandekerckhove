@@ -24,3 +24,6 @@ body {
   height: 150px;
   line-height: 130px;
 }
+.content {
+  margin: 20px;
+}

@@ -96,7 +96,7 @@ export default function BroodMaaltijdFormulier() {
             />
           </FormItem>
         
-          <SubmitButton disabled={false} size='large' className="blue">Voeg toe</SubmitButton>
+          <SubmitButton disabled={false} className="blue">Voeg toe</SubmitButton>
       
         </Form>
       </Formik>

@@ -17,7 +17,7 @@ export default function VoegMaaltijdToe() {
 
       <Space size={150}>
         <Button
-          size="large"
+
           type="primary"
           className="blue"
           onClick={() => setWarmeMaaltijdFormulier(true)}
@@ -25,7 +25,7 @@ export default function VoegMaaltijdToe() {
           Warme maaltijd
         </Button>
         <Button
-          size="large"
+          
           type="primary"
           className="blue"
           onClick={() => setWarmeMaaltijdFormulier(false)}

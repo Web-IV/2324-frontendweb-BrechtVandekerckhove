@@ -7,6 +7,7 @@ export default function WarmeMaaltijd({
   bestellingsnr,
 }) {
   return (
+    
     <>
       <tr>
         <td>Hoofdschotel: {hoofdschotel}</td>
