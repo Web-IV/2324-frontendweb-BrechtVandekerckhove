@@ -23,7 +23,14 @@ body {
 .header {
   height: 150px;
   line-height: 130px;
+  background-color: transparent;
+
 }
 .content {
-  margin: 20px;
+  margin: 50px;
+}
+.menu {
+  margin: 10px 0;
+  border-color: #0269c9;
+  border-width: 5px;
 }

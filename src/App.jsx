@@ -9,10 +9,10 @@ const { Header, Content, Footer } = Layout;
 function App() {
   return (
     <Layout>
-      <Header className=" blue header">
+      <Header className="header">
         <Menu
           mode="horizontal"
-          style={{ margin: "10px 0" }}
+          className="menu"
           items={[
             {
               key: "1",
@@ -24,7 +24,7 @@ function App() {
             },
             {
               key: "3",
-              label: "Winkelmandje",
+              label: <Link to="/winkelmandje">Winkelmandje</Link>,
               icon: <ShoppingCartOutlined />,
               style: { marginLeft: "auto" },
             },

@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BestellingOverzicht from "./pages/BestellingOverzicht.jsx";
 import VoegMaaltijdToe from "./pages/voegMaaltijdToe.jsx";
+import Winkelmandje from "./pages/Winkelmandje.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "bestellingen",
         element: <BestellingOverzicht />,
+      },
+      {
+        path:"winkelmandje",
+        element: <Winkelmandje />,
       },
 
       {
