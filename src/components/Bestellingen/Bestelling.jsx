@@ -76,7 +76,7 @@ export default function Bestelling({
     <div style={{ maxWidth: "800px" }}>
       <Table
         columns={columns}
-        showHeader={true}
+        showHeader={false}
         pagination={false}
         dataSource={data}
         expandable={{

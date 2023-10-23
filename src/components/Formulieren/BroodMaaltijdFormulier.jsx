@@ -1,8 +1,6 @@
 import { Formik, Form, useField } from "formik";
 import { Select, FormItem, SubmitButton, DatePicker } from "formik-antd";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-dayjs.extend(customParseFormat);
+import { message } from "antd";
 import {
   hartigBelegOpties,
   sandwichesOpties,
@@ -10,13 +8,11 @@ import {
   dessertOpties,
   vetstofOpties,
   soepOpties,
-} from "../../data/opties_maaltijdedformulieren.js";
+} from "../../data/opties_maaltijdformulieren.js";
 import * as Yup from "yup";
-import useSWRMutation from "swr/mutation";
-import { save } from "../../api";
 import Error from "../Error";
 
-const formItemLayout = { labelCol:{span:5}, labelAlign: "left" };
+const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -30,21 +26,8 @@ const MySelect = ({ label, ...props }) => {
       >
         <Select {...field} {...props}></Select>
       </FormItem>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
+      {meta.touched && meta.error ? <Error error={meta.error} /> : null}
     </>
-  );
-};
-
-const disabledDate = (current) => {
-  const dagenInVerledenEnVandaag = current < dayjs().endOf("day");
-  //hier dynamisch instellen
-  const dagenReedsBestelling = [dayjs("2023-10-20"), dayjs("2023-10-24")];
-
-  return (
-    (current && dagenInVerledenEnVandaag) ||
-    dagenReedsBestelling.some((date) => current.isSame(date, "day"))
   );
 };
 
@@ -52,17 +35,19 @@ const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
 });
 
-
-
-export default function BroodMaaltijdFormulier() {
-  const { trigger: saveBestelling, error: saveError } = useSWRMutation(
-    "bestellingen",
-    save
-  );
-
+export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
+  const [messageApi, contextHolder] = message.useMessage();
+  const showConfirmation = () => {
+    messageApi.open({
+      type: "success",
+      content: "Maaltijd toegevoegd aan winkelmandje",
+      duration: 3,
+    });
+  };
+  
   return (
     <div className="maaltijdFormulier">
-      <Error error={saveError} />
+      {contextHolder}
       <Formik
         initialValues={{
           soep: soepOpties[0].value,
@@ -74,18 +59,14 @@ export default function BroodMaaltijdFormulier() {
           leverdatum: "",
         }}
         validationSchema={validation}
-        //medewerker en id maaltijdis nu hardcoded, maar moeten dynamisch worden
-        onSubmit={async (data, { setSubmitting }) => {
-          await saveBestelling({
-            medewerker: {
-              id: "5",
-              naam: "test",
-              voornaam: "test2",
-              dienst: "Labo",
-            },
-            maaltijden: [{ id: "99", type: "broodMaaltijd", ...data }],
+        onSubmit={(data, { resetForm, setSubmitting }) => {
+          saveMaaltijd({
+            type: "broodMaaltijd",
+            ...data,
           });
+          resetForm();
           setSubmitting(false);
+          showConfirmation();
         }}
       >
         <Form>
@@ -107,7 +88,7 @@ export default function BroodMaaltijdFormulier() {
           />
           <MySelect label="Vetstof" name="vetstof" options={vetstofOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem name="leverdatum" label="Leverdatum"  {...formItemLayout}>
+          <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
             <DatePicker
               name="leverdatum"
               format="DD-MM-YYYY"
@@ -116,7 +97,9 @@ export default function BroodMaaltijdFormulier() {
               style={{ width: "100%" }}
             />
           </FormItem>
-          <SubmitButton disabled={false}  className="blue">Voeg toe</SubmitButton>
+          <SubmitButton disabled={false} className="blue">
+            Voeg toe
+          </SubmitButton>
         </Form>
       </Formik>
     </div>

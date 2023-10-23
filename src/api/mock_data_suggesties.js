@@ -112,7 +112,7 @@ export const SUGGESTIES = [
     id: 19,
     maand: 10,
     vegie: false,
-    omschrijving: " gekruide balletjes met luikse saus, wortelstamppot",
+    omschrijving: "gekruide balletjes met luikse saus, wortelstamppot",
   },
   {
     id: 20,
