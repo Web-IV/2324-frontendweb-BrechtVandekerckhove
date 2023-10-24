@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <BestellingOverzicht />,
       },
       {
-        path:"winkelmandje",
+        path: "winkelmandje",
         element: <Winkelmandje />,
       },
 

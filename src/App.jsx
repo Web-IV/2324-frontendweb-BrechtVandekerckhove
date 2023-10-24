@@ -24,7 +24,11 @@ function App() {
             },
             {
               key: "3",
-              label: <Link to="/winkelmandje">Winkelmandje</Link>,
+              label: (
+                <Link to="/winkelmandje">
+                  Winkelmandje
+                </Link>
+              ),
               icon: <ShoppingCartOutlined />,
               style: { marginLeft: "auto" },
             },

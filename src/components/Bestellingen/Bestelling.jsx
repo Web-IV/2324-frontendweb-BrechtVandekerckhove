@@ -1,5 +1,5 @@
 import Maaltijd from "../Maaltijden/Maaltijd";
-import { useCallback, memo } from "react";
+import { useCallback } from "react";
 import { Button, Modal, Table, Space } from "antd";
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
@@ -19,7 +19,6 @@ export default function Bestelling({
   maaltijden,
   onDelete,
 }) {
-  console.log('render Bestelling');
   const handleDelete = useCallback(() => {
     onDelete(bestellingsnr);
   }, [bestellingsnr, onDelete]);

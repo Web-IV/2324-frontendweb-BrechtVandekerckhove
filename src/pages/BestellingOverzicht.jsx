@@ -25,10 +25,12 @@ export default function BestellingOverzicht() {
     isLoading,
     error,
   } = useSWR("bestellingen", getAll);
+
   const { trigger: deleteBestelling, error: deleteError } = useSWRMutation(
     "bestellingen",
     deleteByBestellingsnr
   );
+  
   return (
     <>
       <Title>Bestellingen</Title>

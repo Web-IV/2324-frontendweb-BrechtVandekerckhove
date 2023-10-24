@@ -1,4 +1,13 @@
-import { Row, Col, Button, Typography, Table, Divider, Empty } from "antd";
+import {
+  Row,
+  Col,
+  Button,
+  Typography,
+  Table,
+  Divider,
+  Empty,
+  message,
+} from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import Maaltijd from "../components/Maaltijden/Maaltijd";
 import useSWRMutation from "swr/mutation";
@@ -51,16 +60,18 @@ export default function Winkelmandje() {
               Verwijder
             </Button>
           </div>
-          <div>
-            <Button type="default" style={{ marginTop: "10px" }}>
-              <EditOutlined />
-              Bewerk
-            </Button>
-          </div>
         </div>
       ),
     },
   ];
+  const [messageApi, contextHolder] = message.useMessage();
+  const showConfirmation = () => {
+    messageApi.open({
+      type: "success",
+      content: "Bestelling succesvol geplaatst",
+      duration: 3,
+    });
+  };
 
   return (
     <div style={{ width: "80%", margin: "auto" }}>
@@ -133,10 +144,13 @@ export default function Winkelmandje() {
                 maaltijden: maaltijden,
               });
               localStorage.removeItem("maaltijden");
+              setMaaltijden(null);
+              showConfirmation();
             }}
           >
             Plaats bestelling
           </Button>
+          {contextHolder}
         </Col>
       </Row>
       <Row>
