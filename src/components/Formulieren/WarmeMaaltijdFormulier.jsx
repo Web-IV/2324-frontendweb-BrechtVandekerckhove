@@ -1,5 +1,5 @@
 import { Formik, Form, useField } from "formik";
-import { Select, FormItem, SubmitButton, DatePicker } from "formik-antd";
+import { Select, FormItem, SubmitButton } from "formik-antd";
 import { message } from "antd";
 import {
   hoofdschotelOpties,
@@ -8,7 +8,7 @@ import {
 } from "../../data/opties_maaltijdformulieren.js";
 import * as Yup from "yup";
 import Error from "../Error";
-
+import Datepicker from "./Componenten/Datepicker.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
@@ -34,7 +34,10 @@ const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
 });
 
-export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
+export default function BroodMaaltijdFormulier({
+  saveMaaltijd,
+  initialValues,
+}) {
   const [messageApi, contextHolder] = message.useMessage();
   const showConfirmation = () => {
     messageApi.open({
@@ -48,12 +51,16 @@ export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
     <div className="maaltijdFormulier">
       {contextHolder}
       <Formik
-        initialValues={{
-          hoofdschotel: hoofdschotelOpties[0].value,
-          soep: soepOpties[0].value,
-          dessert: dessertOpties[0].value,
-          leverdatum: "",
-        }}
+        initialValues={
+          initialValues
+            ? { ...initialValues }
+            : {
+                hoofdschotel: hoofdschotelOpties[0].value,
+                soep: soepOpties[0].value,
+                dessert: dessertOpties[0].value,
+                leverdatum: "",
+              }
+        }
         validationSchema={validation}
         onSubmit={(data, { resetForm, setSubmitting }) => {
           saveMaaltijd({
@@ -74,13 +81,11 @@ export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
           <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
           <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
-            <DatePicker
-              name="leverdatum"
-              format="DD-MM-YYYY"
-              disabledDate={disabledDate}
-              placeholder="Selecteer een datum"
-              style={{ width: "100%" }}
-            />
+            {initialValues ? (
+              <Datepicker huidigeDatumMaaltijd={initialValues.leverdatum} />
+            ) : (
+              <Datepicker />
+            )}
           </FormItem>
 
           <SubmitButton disabled={false} className="blue">

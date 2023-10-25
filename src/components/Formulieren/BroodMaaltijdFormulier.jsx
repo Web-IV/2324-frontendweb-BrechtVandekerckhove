@@ -1,5 +1,5 @@
 import { Formik, Form, useField } from "formik";
-import { Select, FormItem, SubmitButton, DatePicker } from "formik-antd";
+import { Select, FormItem, SubmitButton } from "formik-antd";
 import { message } from "antd";
 import {
   hartigBelegOpties,
@@ -11,6 +11,7 @@ import {
 } from "../../data/opties_maaltijdformulieren.js";
 import * as Yup from "yup";
 import Error from "../Error";
+import Datepicker from "./Componenten/Datepicker.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 const MySelect = ({ label, ...props }) => {
@@ -35,7 +36,10 @@ const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
 });
 
-export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
+export default function BroodMaaltijdFormulier({
+  saveMaaltijd,
+  initialValues,
+}) {
   const [messageApi, contextHolder] = message.useMessage();
   const showConfirmation = () => {
     messageApi.open({
@@ -44,20 +48,24 @@ export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
       duration: 3,
     });
   };
-  
+
   return (
     <div className="maaltijdFormulier">
       {contextHolder}
       <Formik
-        initialValues={{
-          soep: soepOpties[0].value,
-          typeSandwiches: sandwichesOpties[0].value,
-          hartigBeleg: hartigBelegOpties[0].value,
-          zoetBeleg: zoetBelegOpties[0].value,
-          vetstof: vetstofOpties[0].value,
-          dessert: dessertOpties[0].value,
-          leverdatum: "",
-        }}
+        initialValues={
+          initialValues
+            ? { ...initialValues }
+            : {
+                typeSandwiches: sandwichesOpties[0].value,
+                soep: soepOpties[0].value,
+                hartigBeleg: hartigBelegOpties[0].value,
+                zoetBeleg: zoetBelegOpties[0].value,
+                vetstof: vetstofOpties[0].value,
+                dessert: dessertOpties[0].value,
+                leverdatum: "",
+              }
+        }
         validationSchema={validation}
         onSubmit={(data, { resetForm, setSubmitting }) => {
           saveMaaltijd({
@@ -70,12 +78,12 @@ export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
         }}
       >
         <Form>
-          <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect
             label="Sandwiches"
             name="typeSandwiches"
             options={sandwichesOpties}
           />
+          <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect
             label="Hartig beleg"
             name="hartigBeleg"
@@ -89,13 +97,11 @@ export default function BroodMaaltijdFormulier({ saveMaaltijd, disabledDate }) {
           <MySelect label="Vetstof" name="vetstof" options={vetstofOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
           <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
-            <DatePicker
-              name="leverdatum"
-              format="DD-MM-YYYY"
-              disabledDate={disabledDate}
-              placeholder="Selecteer een datum"
-              style={{ width: "100%" }}
-            />
+            {initialValues ? (
+              <Datepicker huidigeDatumMaaltijd={initialValues.leverdatum} />
+            ) : (
+              <Datepicker />
+            )}
           </FormItem>
           <SubmitButton disabled={false} className="blue">
             Voeg toe

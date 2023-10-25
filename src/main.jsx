@@ -5,8 +5,10 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BestellingOverzicht from "./pages/BestellingOverzicht.jsx";
 import VoegMaaltijdToe from "./pages/voegMaaltijdToe.jsx";
-import Winkelmandje from "./pages/Winkelmandje.jsx";
+import WinkelmandjePagina from "./pages/WinkelmandjePagina.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import BewerkMaaltijd from "./components/Winkelmandje/BewerkMaaltijd.jsx";
+import Winkelmandje from "./components/Winkelmandje/WinkelmandjeOverzicht.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +25,23 @@ const router = createBrowserRouter([
       },
       {
         path: "winkelmandje",
-        element: <Winkelmandje />,
+        element: <WinkelmandjePagina />,
+        children: [
+          {
+            path: "",
+            index: true,
+            element: <Winkelmandje />,
+          },
+          {
+            path: "bewerk/:id",
+            element: <BewerkMaaltijd />,
+          },
+        ],
       },
-
+      {
+        path: "bewerkMaaltijd",
+        element: <BewerkMaaltijd />,
+      },
       {
         path: "*",
         element: <NotFound />,

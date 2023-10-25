@@ -9,13 +9,12 @@ import {
   message,
 } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import Maaltijd from "../components/Maaltijden/Maaltijd";
+import Maaltijd from "../Maaltijden/Maaltijd";
 import useSWRMutation from "swr/mutation";
-import { save } from "../api";
-import Error from "../components/Error";
+import { save } from "../../api";
+import Error from "../Error";
 import { useState } from "react";
-
-//basis code: https://github.com/bilaltahseen/Shoping-Cart-UI-Antdesign/blob/master/src/Pages/Cart.js
+import { Link } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -57,8 +56,16 @@ export default function Winkelmandje() {
           <div>
             <Button danger onClick={() => deleteMaaltijd(index)}>
               <DeleteOutlined />
-              Verwijder
+              verwijder
             </Button>
+          </div>
+          <div>
+            <Link to={`/winkelmandje/bewerk/${index}`}>
+              <Button type="default" style={{ marginTop: "10px" }}>
+                <EditOutlined />
+                Bewerk
+              </Button>
+            </Link>
           </div>
         </div>
       ),
@@ -75,7 +82,6 @@ export default function Winkelmandje() {
 
   return (
     <div style={{ width: "80%", margin: "auto" }}>
-      <Title level={1}>Winkelmandje</Title>
       <Title level={2}>
         Aantal maaltijden: {maaltijden ? maaltijden.length : 0}
       </Title>
@@ -87,6 +93,7 @@ export default function Winkelmandje() {
           maaltijden
             ? maaltijden.map((maaltijd, index) => ({
                 // maaltijd index wordt pas in de database gecreeerd
+
                 key: index,
                 product: (
                   <Maaltijd
