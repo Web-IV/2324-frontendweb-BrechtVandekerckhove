@@ -3,8 +3,11 @@ import AsyncData from "../components/AsyncData";
 import useSWR from "swr";
 import { getAll, deleteByBestellingsnr } from "../api";
 import useSWRMutation from "swr/mutation";
-import { Typography, DatePicker, Button } from "antd";
-import { useState } from "react";
+import { Typography, DatePicker, Button, Space } from "antd";
+import { useState, useMemo } from "react";
+import dayjs from "dayjs";
+import Maaltijd from "../components/Maaltijden/Maaltijd";
+import MaaltijdenLijst from "../components/Maaltijden/MaaltijdenLijst";
 
 const { Title } = Typography;
 
@@ -25,19 +28,24 @@ export default function BestellingOverzicht() {
     error,
   } = useSWR("bestellingen", getAll);
 
-  const [search, setSearch] = useState();
+  const [leverdatum, setLeverdatum] = useState();
+  const [zoekLeverdatum, setZoekLeverdatum] = useState();
 
   const { trigger: deleteBestelling, error: deleteError } = useSWRMutation(
     "bestellingen",
     deleteByBestellingsnr
   );
 
-  let m = null;
-  const gefilterdeMaaltijden = (search) => () => {
-    m = bestellingen
-      .flatMap((bestelling) => bestelling.maaltijden)
-      .filter((maaltijd) => maaltijd.leverdatum === search);
-  };
+  const gefilterdeMaaltijden = useMemo(
+    () =>
+      bestellingen
+        .flatMap((bestelling) => bestelling.maaltijden)
+        .filter(
+          (maaltijd) =>
+            dayjs(maaltijd.leverdatum).format("DD-MM-YYYY") === zoekLeverdatum
+        ),
+    [bestellingen, zoekLeverdatum]
+  );
 
   return (
     <>
@@ -45,34 +53,30 @@ export default function BestellingOverzicht() {
       <AsyncData loading={isLoading} error={error || deleteError}>
         {!error ? (
           <>
-            {" "}
             <BestellingTabel
               bestellingen={bestellingen}
               onDelete={deleteBestelling}
             />
             <Title level={2}>Zoek maaltijd op leverdatum</Title>
-            <DatePicker
-              placeholder="Leverdatum"
-              onChange={(date) => setSearch(date)}
-            />
-            <Button onClick={gefilterdeMaaltijden(search)}>Zoek</Button>
-            {m === null
-              ? null
-              : m.map((maaltijd) => (
-                  <Maaltijd
-                    type={maaltijd.type}
-                    leverdatum={maaltijd.leverdatum}
-                    hoofdschotel={maaltijd.hoofdschotel}
-                    //Formik doet moeilijk over boolean values...
-                    soep={maaltijd.soep === "soep" ? true : false}
-                    dessert={maaltijd.dessert}
-                    typeSandwiches={maaltijd.typeSandwiches}
-                    hartigBeleg={maaltijd.hartigBeleg}
-                    zoetBeleg={maaltijd.zoetBeleg}
-                    vetstof={maaltijd.vetstof === "vetstof" ? true : false}
-                    suggestieVanDeMaandId={maaltijd.suggestieVanDeMaandId}
-                  />
-                ))}
+            <Space size="middle">
+              <DatePicker
+                placeholder="Leverdatum"
+                format="DD-MM-YYYY"
+                onChange={(date, dateString) => setLeverdatum(dateString)}
+              />
+              <Button
+                type="primary"
+                className="blue"
+                onClick={() => {
+                  setZoekLeverdatum(leverdatum);
+                  console.log(gefilterdeMaaltijden);
+                }}
+              >
+                Zoek
+              </Button>
+            </Space>
+
+            <MaaltijdenLijst maaltijden={gefilterdeMaaltijden}/>
           </>
         ) : null}
       </AsyncData>
