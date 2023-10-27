@@ -11,7 +11,7 @@ export default function NotFound() {
       extra={
         <Button className="blue">
           <Link to="/" style={{ color: "white" }}>
-            Back Home
+            Home
           </Link>
         </Button>
       }

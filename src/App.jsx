@@ -1,8 +1,8 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Button } from "antd";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, UserOutlined} from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 
@@ -24,13 +24,14 @@ function App() {
             },
             {
               key: "3",
-              label: (
-                <Link to="/winkelmandje">
-                  Winkelmandje
-                </Link>
-              ),
-              icon: <ShoppingCartOutlined />,
+              label: <Link to="/profiel">Mijn profiel</Link>,
+              icon: <UserOutlined />,
               style: { marginLeft: "auto" },
+            },
+            {
+              key: "4",
+              label: <Link to="/winkelmandje">Winkelmandje</Link>,
+              icon: <ShoppingCartOutlined />,
             },
           ]}
         />
