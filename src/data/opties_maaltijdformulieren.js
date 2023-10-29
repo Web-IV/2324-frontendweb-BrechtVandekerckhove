@@ -1,7 +1,7 @@
 export const soepOpties= [
   {
-    value: "soep",
-    label: "soep",
+    value: "dagsoep",
+    label: "dagsoep",
   },
   {
     value: "geen soep",

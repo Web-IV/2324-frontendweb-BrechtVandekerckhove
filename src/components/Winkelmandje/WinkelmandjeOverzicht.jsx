@@ -93,23 +93,8 @@ export default function Winkelmandje() {
           maaltijden
             ? maaltijden.map((maaltijd, index) => ({
                 // maaltijd index wordt pas in de database gecreeerd
-
                 key: index,
-                product: (
-                  <Maaltijd
-                    type={maaltijd.type}
-                    leverdatum={maaltijd.leverdatum}
-                    hoofdschotel={maaltijd.hoofdschotel}
-                    //Formik doet moeilijk over boolean values...
-                    soep={maaltijd.soep === "soep" ? true : false}
-                    dessert={maaltijd.dessert}
-                    typeSandwiches={maaltijd.typeSandwiches}
-                    hartigBeleg={maaltijd.hartigBeleg}
-                    zoetBeleg={maaltijd.zoetBeleg}
-                    vetstof={maaltijd.vetstof === "vetstof" ? true : false}
-                    suggestieVanDeMaandId={maaltijd.suggestieVanDeMaandId}
-                  />
-                ),
+                product: <Maaltijd {...maaltijd} />,
               }))
             : null
         }
@@ -139,15 +124,10 @@ export default function Winkelmandje() {
             className="blue"
             type="primary"
             disabled={!maaltijden}
-            //medewerker hier nog hard gecodeerd
+            //medewerkerId hier nog hard gecodeerd
             onClick={async () => {
               await saveBestelling({
-                medewerker: {
-                  id: "5",
-                  naam: "test",
-                  voornaam: "test2",
-                  dienst: "Labo",
-                },
+                medewerkerId: 1,
                 maaltijden: maaltijden,
               });
               localStorage.removeItem("maaltijden");

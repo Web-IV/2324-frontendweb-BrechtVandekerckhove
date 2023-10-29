@@ -3,7 +3,7 @@ import AsyncData from "../components/AsyncData";
 import useSWR from "swr";
 import { getAll, deleteByBestellingsnr } from "../api";
 import useSWRMutation from "swr/mutation";
-import { Typography, DatePicker, Button, Space } from "antd";
+import { Typography, DatePicker, Button, Space, Table, Empty } from "antd";
 import { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import Maaltijd from "../components/Maaltijden/Maaltijd";
@@ -53,10 +53,23 @@ export default function BestellingOverzicht() {
       <AsyncData loading={isLoading} error={error || deleteError}>
         {!error ? (
           <>
-            <BestellingTabel
-              bestellingen={bestellingen}
-              onDelete={deleteBestelling}
-            />
+            {bestellingen.length === 0 ? (
+              <Table
+                locale={{
+                  emptyText: (
+                    <Empty
+                      image={Empty.PRESENTED_IMAGE_SIMPLE}
+                      description="Geen bestellingen"
+                    />
+                  ),
+                }}
+              />
+            ) : (
+              <BestellingTabel
+                bestellingen={bestellingen}
+                onDelete={deleteBestelling}
+              />
+            )}
             <Title level={2}>Zoek maaltijd op leverdatum</Title>
             <Space size="middle">
               <DatePicker
@@ -69,14 +82,12 @@ export default function BestellingOverzicht() {
                 className="blue"
                 onClick={() => {
                   setZoekLeverdatum(leverdatum);
-                  console.log(gefilterdeMaaltijden);
                 }}
               >
                 Zoek
               </Button>
             </Space>
-
-            <MaaltijdenLijst maaltijden={gefilterdeMaaltijden}/>
+            <MaaltijdenLijst maaltijden={gefilterdeMaaltijden} />
           </>
         ) : null}
       </AsyncData>

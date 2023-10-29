@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import Error from "../Error";
 import Datepicker from "./Componenten/Datepicker.jsx";
 
-const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
+const formItemLayout = { labelCol: { span:5 }, labelAlign: "left" };
 
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -34,7 +34,7 @@ const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
 });
 
-export default function BroodMaaltijdFormulier({
+export default function WarmeMaaltijdFormulier({
   saveMaaltijd,
   initialValues,
 }) {
@@ -62,7 +62,7 @@ export default function BroodMaaltijdFormulier({
               }
         }
         validationSchema={validation}
-        onSubmit={(data, { resetForm, setSubmitting }) => {
+        onSubmit={(data, { resetForm, setSubmitting }) => { 
           saveMaaltijd({
             type: "warmeMaaltijd",
             ...data,
@@ -81,8 +81,8 @@ export default function BroodMaaltijdFormulier({
           <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
           <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
-            {initialValues ? (
-              <Datepicker huidigeDatumMaaltijd={initialValues.leverdatum} />
+            {initialValues? (
+              <Datepicker huidigeDatumBewerkMaaltijd={initialValues.leverdatum} />
             ) : (
               <Datepicker />
             )}

@@ -22,23 +22,8 @@ export default function MaaltijdenLijst({ maaltijden }) {
       columns={columns}
       dataSource={maaltijden.map((maaltijd, index) => ({
         // maaltijd index wordt pas in de database gecreeerd
-
         key: index,
-        maaltijd: (
-          <Maaltijd
-            type={maaltijd.type}
-            leverdatum={maaltijd.leverdatum}
-            hoofdschotel={maaltijd.hoofdschotel}
-            //Formik doet moeilijk over boolean values...
-            soep={maaltijd.soep === "soep" ? true : false}
-            dessert={maaltijd.dessert}
-            typeSandwiches={maaltijd.typeSandwiches}
-            hartigBeleg={maaltijd.hartigBeleg}
-            zoetBeleg={maaltijd.zoetBeleg}
-            vetstof={maaltijd.vetstof === "vetstof" ? true : false}
-            suggestieVanDeMaandId={maaltijd.suggestieVanDeMaandId}
-          />
-        ),
+        maaltijd: <Maaltijd {...maaltijd} />,
       }))}
       locale={{
         emptyText: (

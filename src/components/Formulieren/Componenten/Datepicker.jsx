@@ -1,18 +1,18 @@
 import { DatePicker } from "formik-antd";
 import AsyncData from "../../AsyncData";
 import useSWR from "swr";
-import { getLeverdataBestellingen } from "../../../api";
+import { getAll } from "../../../api";
 import dayjs from "dayjs";
 
 const vandaag = dayjs().startOf("day");
 const isVoorTienUur = dayjs().isBefore(vandaag.add(10, "hour"));
 
-export default function Datepicker(huidigeDatumMaaltijd) {
+export default function Datepicker({ huidigeDatumBewerkMaaltijd }) {
   const {
     data: leverdata = [],
     isLoading,
     error,
-  } = useSWR("bestellingen/leverdata", getLeverdataBestellingen);
+  } = useSWR("bestellingen/leverdata", getAll);
 
   //leverdata van alle bestellingen ophalen via api
   const leverdataMaaltijdenInBestellingen = leverdata.map((leverdatum) =>
@@ -32,9 +32,10 @@ export default function Datepicker(huidigeDatumMaaltijd) {
       acc.push(dayjs(maaltijd.leverdatum));
       return acc;
     }, []);
-    if (huidigeDatumMaaltijd) {
-      const index =
-        leverdataMaaltijdenInWinkelmandje.indexOf(huidigeDatumMaaltijd);
+    if (huidigeDatumBewerkMaaltijd) {
+      const index = leverdataMaaltijdenInWinkelmandje.indexOf(
+        huidigeDatumBewerkMaaltijd
+      );
       leverdataMaaltijdenInWinkelmandje.splice(index, 1);
     }
 

@@ -98,7 +98,7 @@ export default function BroodMaaltijdFormulier({
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
           <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
             {initialValues ? (
-              <Datepicker huidigeDatumMaaltijd={initialValues.leverdatum} />
+              <Datepicker huidigeDatumBewerkMaaltijd={initialValues.leverdatum} />
             ) : (
               <Datepicker />
             )}

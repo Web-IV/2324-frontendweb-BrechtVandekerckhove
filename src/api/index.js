@@ -7,11 +7,6 @@ export async function getAll(url) {
   return data.items;
 }
 
-export async function getLeverdataBestellingen(url){
-  const {data} = await axios.get(` ${baseUrl}/${url}`);
-  return data;
-}
-
 export const deleteByBestellingsnr = async (url, { arg: bestellingsnr }) => {
   await axios.delete(` ${baseUrl}/${url}/${bestellingsnr}`);
 };

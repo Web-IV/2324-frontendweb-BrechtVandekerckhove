@@ -1,6 +1,6 @@
 import BroodMaaltijd from "./BroodMaaltijd";
 import WarmeMaaltijd from "./WarmeMaaltijd";
-import { dateConverter } from "../Bestellingen/Bestelling";
+
 export default function Maaltijd({
   id,
   type,
@@ -13,38 +13,23 @@ export default function Maaltijd({
   zoetBeleg,
   vetstof,
   suggestieVanDeMaandId,
+  sugestieVanDeMaandOmschrijving,
   bestellingsnr,
 }) {
   const isWarmeMaaltijd = type == "warmeMaaltijd";
 
   return isWarmeMaaltijd ? (
-  
-    <table>
-      <thead style={{ textAlign: "left" }}>
-        <tr>
-          <th>{dateConverter(leverdatum)}: warme maaltijd</th>
-        </tr>
-      </thead>
-      <tbody>
-        <WarmeMaaltijd
-          id={id}
-          hoofdschotel={hoofdschotel}
-          soep={soep}
-          dessert={dessert}
-          suggestieVanDeMaandId={suggestieVanDeMaandId}
-          bestellingsnr={bestellingsnr}
-        />
-      </tbody>
-    </table>
-
+    <WarmeMaaltijd
+      id={id}
+      hoofdschotel={hoofdschotel}
+      soep={soep}
+      dessert={dessert}
+      leverdatum={leverdatum}
+      suggestieVanDeMaandId={suggestieVanDeMaandId}
+      sugestieVanDeMaandOmschrijving={sugestieVanDeMaandOmschrijving}
+      bestellingsnr={bestellingsnr}
+    />
   ) : (
-    <table>
-      <thead style={{ textAlign: "left" }}>
-        <tr>
-          <th>{dateConverter(leverdatum)}: broodmaaltijd </th>
-        </tr>
-      </thead>
-      <tbody>
         <BroodMaaltijd
           id={id}
           soep={soep}
@@ -53,9 +38,9 @@ export default function Maaltijd({
           hartigBeleg={hartigBeleg}
           zoetBeleg={zoetBeleg}
           vetstof={vetstof}
+          leverdatum={leverdatum}
           bestellingsnr={bestellingsnr}
         />
-      </tbody>
-    </table>
+     
   );
 }

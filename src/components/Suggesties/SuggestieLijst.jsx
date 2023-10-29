@@ -1,8 +1,10 @@
-import SUGGESTIES from "../../api/mock_data_suggesties";
+
 import SuggestieVanDeMaand from "./SuggestieVanDeMaand";
 import { Typography } from "antd";
-
+import AsyncData from "../AsyncData";
 const { Title } = Typography;
+
+
 const huidigeMaand = new Date().getMonth() + 1;
 const komendeDrieMaanden = [
   huidigeMaand,
@@ -20,29 +22,35 @@ const maandNummerOmzettenNaarMaandString = (maandNummer) => {
   return maandString.charAt(0).toLocaleUpperCase() + maandString.slice(1);
 };
 
-export default function SuggestieLijst() {
+export default function SuggestieLijst({suggesties, isLoading, error}) {
+ 
   return (
     <>
       <Title level={2}>Suggesties komende maanden:</Title>
-      {SUGGESTIES.filter((suggestie) =>
-        komendeDrieMaanden.includes(suggestie.maand)
-      )
-        .sort((a, b) => {
-          a = (a.maand - huidigeMaand + 12) % 12;
-          b = (b.maand - huidigeMaand + 12) % 12;
-          return a - b;
-        })
-        .map((suggestie, index) => (
-          <div key={suggestie.id}>
-            {/*Per 2 suggesties maand weergeven*/}
-            {index % 2 == 0 ? (
-              <Title level={3}>
-                {maandNummerOmzettenNaarMaandString(suggestie.maand)}
-              </Title>
-            ) : null}
-            <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
-          </div>
-        ))}
+      <AsyncData loading={isLoading} error={error}>
+        {!error
+          ? suggesties
+              .filter((suggestie) =>
+                komendeDrieMaanden.includes(suggestie.maand)
+              )
+              .sort((a, b) => {
+                a = (a.maand - huidigeMaand + 12) % 12;
+                b = (b.maand - huidigeMaand + 12) % 12;
+                return a - b;
+              })
+              .map((suggestie, index) => (
+                <div key={suggestie.id}>
+                  {/*Per 2 suggesties maand weergeven*/}
+                  {index % 2 == 0 ? (
+                    <Title level={3}>
+                      {maandNummerOmzettenNaarMaandString(suggestie.maand)}
+                    </Title>
+                  ) : null}
+                  <SuggestieVanDeMaand key={suggestie.id} {...suggestie} />
+                </div>
+              ))
+          : null}
+      </AsyncData>
     </>
   );
 }
