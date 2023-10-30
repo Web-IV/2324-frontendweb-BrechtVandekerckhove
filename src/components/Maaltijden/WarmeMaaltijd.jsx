@@ -1,7 +1,5 @@
 import { dateConverter } from "../Bestellingen/Bestelling";
 import dayjs from "dayjs";
-import useSWR from "swr";
-import { getAll } from "../../api";
 
 export default function WarmeMaaltijd({
   id,
@@ -10,9 +8,11 @@ export default function WarmeMaaltijd({
   dessert,
   leverdatum,
   suggestieVanDeMaandId,
-  sugestieVanDeMaandOmschrijving,
+  suggestieVanDeMaandOmschrijving,
   bestellingsnr,
 }) {
+  const maand = dayjs(leverdatum).month() + 1;
+  const vegie = hoofdschotel.includes("vegetarisch");
 
   return (
     <table>
@@ -25,10 +25,10 @@ export default function WarmeMaaltijd({
         <tr>
           <td>Hoofdschotel: {hoofdschotel}</td>
         </tr>
-        {suggestieVanDeMaandId ? (
+        {suggestieVanDeMaandOmschrijving ? (
           <tr>
             <td>
-              {hoofdschotel}: {suggestieVanDeMaandId}
+              Omschrijving: {suggestieVanDeMaandOmschrijving}
             </td>
           </tr>
         ) : null}
