@@ -37,14 +37,14 @@ export default function BewerkMaaltijd() {
         <Space size={150}>
           <Button
             type="primary"
-            className="blue"
+            className={warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
             onClick={() => setWarmeMaaltijdFormulier(true)}
           >
             Warme maaltijd
           </Button>
           <Button
             type="primary"
-            className="blue"
+            className={!warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
             onClick={() => setWarmeMaaltijdFormulier(false)}
           >
             Broodmaaltijd

@@ -20,6 +20,9 @@ body {
 .blue {
   background-color: #0269c9;
 }
+.nonActiveButton{
+  opacity: 0.8;
+}
 .header {
   height: 150px;
   line-height: 130px;

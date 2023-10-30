@@ -54,16 +54,18 @@ export default function VoegMaaltijdToe() {
       <Space wrap size="large">
         <Button
           type="primary"
-          className="blue"
           onClick={() => setWarmeMaaltijdFormulier(true)}
+          className={warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
           style={{ width: "150px" }}
+
         >
           Warme maaltijd
         </Button>
         <Button
           type="primary"
-          className="blue"
           onClick={() => setWarmeMaaltijdFormulier(false)}
+          className={!warmeMaaltijdFormulier ? "blue " : "blue nonActiveButton"}
+  
           style={{ width: "150px" }}
         >
           Broodmaaltijd
