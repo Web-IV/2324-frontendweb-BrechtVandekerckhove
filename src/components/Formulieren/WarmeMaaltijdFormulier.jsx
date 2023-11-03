@@ -7,10 +7,13 @@ import {
   soepOpties,
 } from "../../data/opties_maaltijdformulieren.js";
 import * as Yup from "yup";
-import Error from "../Error";
-import Datepicker from "./Componenten/Datepicker.jsx";
 
-const formItemLayout = { labelCol: { span:5 }, labelAlign: "left" };
+import Datepicker from "./Componenten/Datepicker.jsx";
+import useSWR from "swr";
+import { getAll } from "../../api";
+import AsyncData from "../AsyncData.jsx";
+
+const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
 const MySelect = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -22,16 +25,19 @@ const MySelect = ({ label, ...props }) => {
         label={label}
         {...formItemLayout}
         style={{ marginBottom: "10px" }}
+        validateStatus={meta.touched && meta.error ? "error" : null}
+        help={meta.touched && meta.error ? meta.error : null}
       >
         <Select {...field} {...props}></Select>
+       
       </FormItem>
-      {meta.touched && meta.error ? <Error error={meta.error} /> : null}
     </>
   );
 };
 
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
+  leverplaats: Yup.string().required("Leverplaats is verplicht"),
 });
 
 export default function WarmeMaaltijdFormulier({
@@ -47,9 +53,13 @@ export default function WarmeMaaltijdFormulier({
     });
   };
 
+  const { data: diensten = [], isLoading, error } = useSWR("diensten", getAll);
+
   return (
     <div className="maaltijdFormulier">
       {contextHolder}
+      <AsyncData loading={isLoading} error={error}>
+        {!error ? (
       <Formik
         initialValues={
           initialValues
@@ -59,10 +69,11 @@ export default function WarmeMaaltijdFormulier({
                 soep: soepOpties[0].value,
                 dessert: dessertOpties[0].value,
                 leverdatum: "",
+                leverplaats:"",
               }
         }
         validationSchema={validation}
-        onSubmit={(data, { resetForm, setSubmitting }) => { 
+        onSubmit={(data, { resetForm, setSubmitting }) => {
           saveMaaltijd({
             type: "warmeMaaltijd",
             ...data,
@@ -80,19 +91,35 @@ export default function WarmeMaaltijdFormulier({
           />
           <MySelect label="Soep" name="soep" options={soepOpties} />
           <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
-            {initialValues? (
-              <Datepicker huidigeDatumBewerkMaaltijd={initialValues.leverdatum} />
+          <FormItem
+            name="leverdatum"
+            label="Leverdatum"
+            {...formItemLayout}
+            style={{ marginBottom: "10px" }}
+          >
+            {initialValues ? (
+              <Datepicker
+                huidigeDatumBewerkMaaltijd={initialValues.leverdatum}
+              />
             ) : (
               <Datepicker />
             )}
           </FormItem>
 
+          <MySelect
+            label="Leverplaats"
+            name="leverplaats"
+            placeholder="Selecteer een dienst"
+            options={diensten.map((dienst) => ({
+              value: dienst.naam,
+              label: dienst.naam,
+            }))}
+          />
           <SubmitButton disabled={false} className="blue">
             Voeg toe
           </SubmitButton>
         </Form>
-      </Formik>
+      </Formik>): null}</AsyncData>
     </div>
   );
 }

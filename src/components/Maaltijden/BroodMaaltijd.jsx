@@ -9,6 +9,8 @@ export default function BroodMaaltijd({
   zoetBeleg,
   vetstof,
   leverdatum,
+  leverplaatsId,
+  leverplaats,
   bestellingsnr,
 }) {
   return (
@@ -16,6 +18,9 @@ export default function BroodMaaltijd({
       <thead style={{ textAlign: "left" }}>
         <tr>
           <th>{dateConverter(leverdatum)}: broodmaaltijd</th>
+        </tr>
+        <tr>
+          <td>Leverplaats: {leverplaats}</td>
         </tr>
       </thead>
       <tbody>

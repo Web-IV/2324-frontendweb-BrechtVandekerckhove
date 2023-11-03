@@ -8,9 +8,9 @@ const columns = [
     key: "maaltijd",
   },
   {
-    title: "Dienst",
-    dataIndex: "dienst",
-    key: "dienst",
+    title: "Medewerker",
+    dataIndex: "medewerker",
+    key: "medewerker",
     width: "300px",
   },
 ];

@@ -6,7 +6,6 @@ import useSWRMutation from "swr/mutation";
 import { Typography, DatePicker, Button, Space, Table, Empty } from "antd";
 import { useState, useMemo } from "react";
 import dayjs from "dayjs";
-import Maaltijd from "../components/Maaltijden/Maaltijd";
 import MaaltijdenLijst from "../components/Maaltijden/MaaltijdenLijst";
 
 const { Title } = Typography;

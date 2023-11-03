@@ -7,18 +7,21 @@ export default function WarmeMaaltijd({
   soep,
   dessert,
   leverdatum,
+  leverplaatsId,
+  leverplaats,
   suggestieVanDeMaandId,
   suggestieVanDeMaandOmschrijving,
   bestellingsnr,
 }) {
-  const maand = dayjs(leverdatum).month() + 1;
-  const vegie = hoofdschotel.includes("vegetarisch");
 
   return (
     <table>
       <thead style={{ textAlign: "left" }}>
         <tr>
           <th>{dateConverter(leverdatum)}: warme maaltijd</th>
+        </tr>
+        <tr>
+          <td>Leverplaats: {leverplaats}</td>
         </tr>
       </thead>
       <tbody>

@@ -57,7 +57,7 @@ export default function Datepicker({ huidigeDatumBewerkMaaltijd }) {
           format="DD-MM-YYYY"
           disabledDate={leverdataReedsMaaltijdGepland}
           placeholder="Selecteer een datum"
-          style={{ width: "100%" }}
+          style={{ width: "100%"}}
         />
       ) : null}
     </AsyncData>

@@ -10,8 +10,10 @@ import {
   soepOpties,
 } from "../../data/opties_maaltijdformulieren.js";
 import * as Yup from "yup";
-import Error from "../Error";
 import Datepicker from "./Componenten/Datepicker.jsx";
+import useSWR from "swr";
+import { getAll } from "../../api";
+import AsyncData from "../AsyncData.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 const MySelect = ({ label, ...props }) => {
@@ -24,16 +26,19 @@ const MySelect = ({ label, ...props }) => {
         label={label}
         {...formItemLayout}
         style={{ marginBottom: "10px" }}
+        validateStatus={meta.touched && meta.error ? "error" : null}
+        help={meta.touched && meta.error ? meta.error : null}
       >
         <Select {...field} {...props}></Select>
       </FormItem>
-      {meta.touched && meta.error ? <Error error={meta.error} /> : null}
+      
     </>
   );
 };
 
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
+  leverplaats: Yup.string().required("Leverplaats is verplicht"),
 });
 
 export default function BroodMaaltijdFormulier({
@@ -49,65 +54,95 @@ export default function BroodMaaltijdFormulier({
     });
   };
 
+  const { data: diensten = [], isLoading, error } = useSWR("diensten", getAll);
   return (
     <div className="maaltijdFormulier">
       {contextHolder}
-      <Formik
-        initialValues={
-          initialValues
-            ? { ...initialValues }
-            : {
-                typeSandwiches: sandwichesOpties[0].value,
-                soep: soepOpties[0].value,
-                hartigBeleg: hartigBelegOpties[0].value,
-                zoetBeleg: zoetBelegOpties[0].value,
-                vetstof: vetstofOpties[0].value,
-                dessert: dessertOpties[0].value,
-                leverdatum: "",
-              }
-        }
-        validationSchema={validation}
-        onSubmit={(data, { resetForm, setSubmitting }) => {
-          saveMaaltijd({
-            type: "broodMaaltijd",
-            ...data,
-          });
-          resetForm();
-          setSubmitting(false);
-          showConfirmation();
-        }}
-      >
-        <Form>
-          <MySelect
-            label="Sandwiches"
-            name="typeSandwiches"
-            options={sandwichesOpties}
-          />
-          <MySelect label="Soep" name="soep" options={soepOpties} />
-          <MySelect
-            label="Hartig beleg"
-            name="hartigBeleg"
-            options={hartigBelegOpties}
-          />
-          <MySelect
-            label="Zoet beleg"
-            name="zoetBeleg"
-            options={zoetBelegOpties}
-          />
-          <MySelect label="Vetstof" name="vetstof" options={vetstofOpties} />
-          <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem name="leverdatum" label="Leverdatum" {...formItemLayout}>
-            {initialValues ? (
-              <Datepicker huidigeDatumBewerkMaaltijd={initialValues.leverdatum} />
-            ) : (
-              <Datepicker />
-            )}
-          </FormItem>
-          <SubmitButton disabled={false} className="blue">
-            Voeg toe
-          </SubmitButton>
-        </Form>
-      </Formik>
+      <AsyncData loading={isLoading} error={error}>
+        {!error ? (
+          <Formik
+            initialValues={
+              initialValues
+                ? { ...initialValues }
+                : {
+                    typeSandwiches: sandwichesOpties[0].value,
+                    soep: soepOpties[0].value,
+                    hartigBeleg: hartigBelegOpties[0].value,
+                    zoetBeleg: zoetBelegOpties[0].value,
+                    vetstof: vetstofOpties[0].value,
+                    dessert: dessertOpties[0].value,
+                    leverdatum: "",
+                    leverplaats:"",
+                  }
+            }
+            validationSchema={validation}
+            onSubmit={(data, { resetForm, setSubmitting }) => {
+              saveMaaltijd({
+                type: "broodMaaltijd",
+                ...data,
+              });
+              resetForm();
+              setSubmitting(false);
+              showConfirmation();
+            }}
+          >
+            <Form>
+              <MySelect
+                label="Sandwiches"
+                name="typeSandwiches"
+                options={sandwichesOpties}
+              />
+              <MySelect label="Soep" name="soep" options={soepOpties} />
+              <MySelect
+                label="Hartig beleg"
+                name="hartigBeleg"
+                options={hartigBelegOpties}
+              />
+              <MySelect
+                label="Zoet beleg"
+                name="zoetBeleg"
+                options={zoetBelegOpties}
+              />
+              <MySelect
+                label="Vetstof"
+                name="vetstof"
+                options={vetstofOpties}
+              />
+              <MySelect
+                label="Dessert"
+                name="dessert"
+                options={dessertOpties}
+              />
+              <FormItem
+                name="leverdatum"
+                label="Leverdatum"
+                {...formItemLayout}
+                style={{ marginBottom: "10px" }}
+              >
+                {initialValues ? (
+                  <Datepicker
+                    huidigeDatumBewerkMaaltijd={initialValues.leverdatum}
+                  />
+                ) : (
+                  <Datepicker />
+                )}
+              </FormItem>
+              <MySelect
+                label="Leverplaats"
+                name="leverplaats"
+                placeholder="Selecteer een dienst"
+                options={diensten.map((dienst) => ({
+                  value: dienst.naam,
+                  label: dienst.naam,
+                }))}
+              />
+              <SubmitButton disabled={false} className="blue">
+                Voeg toe
+              </SubmitButton>
+            </Form>
+          </Formik>
+        ) : null}
+      </AsyncData>
     </div>
   );
 }

@@ -5,6 +5,8 @@ export default function Maaltijd({
   id,
   type,
   leverdatum,
+  leverplaatsId,
+  leverplaats,
   hoofdschotel,
   soep,
   dessert,
@@ -25,6 +27,8 @@ export default function Maaltijd({
       soep={soep}
       dessert={dessert}
       leverdatum={leverdatum}
+      leverplaatsId={leverplaatsId}
+      leverplaats={leverplaats}
       suggestieVanDeMaandId={suggestieVanDeMaandId}
       suggestieVanDeMaandOmschrijving={suggestieVanDeMaandOmschrijving}
       bestellingsnr={bestellingsnr}
@@ -39,6 +43,8 @@ export default function Maaltijd({
           zoetBeleg={zoetBeleg}
           vetstof={vetstof}
           leverdatum={leverdatum}
+          leverplaatsId={leverplaatsId}
+          leverplaats={leverplaats}
           bestellingsnr={bestellingsnr}
         />
      
