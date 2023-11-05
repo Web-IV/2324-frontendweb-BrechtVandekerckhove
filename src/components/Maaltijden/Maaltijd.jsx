@@ -15,11 +15,10 @@ export default function Maaltijd({
   zoetBeleg,
   vetstof,
   suggestieVanDeMaandId,
-  suggestieVanDeMaandOmschrijving,
+  suggestieVanDeMaand,
   bestellingsnr,
 }) {
   const isWarmeMaaltijd = type == "warmeMaaltijd";
-
   return isWarmeMaaltijd ? (
     <WarmeMaaltijd
       id={id}
@@ -28,9 +27,11 @@ export default function Maaltijd({
       dessert={dessert}
       leverdatum={leverdatum}
       leverplaatsId={leverplaatsId}
-      leverplaats={leverplaats}
+      //api = leverplaats.naam  //localstorage = leverplaats
+      leverplaats={leverplaats.naam?leverplaats.naam:leverplaats}
       suggestieVanDeMaandId={suggestieVanDeMaandId}
-      suggestieVanDeMaandOmschrijving={suggestieVanDeMaandOmschrijving}
+      //api = suggestieVanDeMaand.omschrijving //localstorage = suggestieVanDeMaand
+      suggestieVanDeMaandOmschrijving={!suggestieVanDeMaand?null:suggestieVanDeMaand.omschrijving?suggestieVanDeMaand.omschrijving:suggestieVanDeMaand}
       bestellingsnr={bestellingsnr}
     />
   ) : (
@@ -44,7 +45,8 @@ export default function Maaltijd({
           vetstof={vetstof}
           leverdatum={leverdatum}
           leverplaatsId={leverplaatsId}
-          leverplaats={leverplaats}
+           //localstorage = leverplaats //api = leverplaats.naam
+          leverplaats={leverplaats.naam?leverplaats.naam:leverplaats}
           bestellingsnr={bestellingsnr}
         />
      

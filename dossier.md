@@ -81,6 +81,11 @@ IR: vreemde sleutel leverplaats verwijst naar _id_ uit _Dienst_, is verplicht
 - De (vegetarische) suggestie van bepaalde maand kan worden opgevraagd:  
 `GET /api/suggesties?maand=${maand}&vegie={vegie}`
 
+### Dienst
+- De diensten kunnen worden opgevraagd:  
+`GET /api/diensten`  
+
+
 ### Maaltijd (momenteel via localstorage, later schrappen?)
 
 - Een gebruiker moet een maaltijd kunnen aanmaken:  
@@ -100,22 +105,22 @@ IR: vreemde sleutel leverplaats verwijst naar _id_ uit _Dienst_, is verplicht
 
 - **componenten**
 
-  - [ ] heeft meerdere componenten - dom & slim (naast login/register)
+  - [x] heeft meerdere componenten - dom & slim (naast login/register)
   - [ ] applicatie is voldoende complex
   - [ ] definieert constanten (variabelen, functies en componenten) buiten de component
-  - [ ] minstens één form met meerdere velden met validatie (naast login/register)
+  - [x] minstens één form met meerdere velden met validatie (naast login/register)
   - [ ] login systeem
         <br />
 
 - **routing**
 
-  - [ ] heeft minstens 2 pagina's (naast login/register)
+  - [x] heeft minstens 2 pagina's (naast login/register)
   - [ ] routes worden afgeschermd met authenticatie en autorisatie
         <br />
 
 - **state-management**
 
-  - [ ] meerdere API calls (naast login/register)
+  - [x] meerdere API calls (naast login/register)
   - [ ] degelijke foutmeldingen indien API-call faalt
   - [ ] gebruikt useState enkel voor lokale state
   - [ ] gebruikt gepast state management voor globale state - indien van toepassing
@@ -129,7 +134,8 @@ IR: vreemde sleutel leverplaats verwijst naar _id_ uit _Dienst_, is verplicht
 - **varia**
 
   - [ ] een aantal niet-triviale e2e testen
-  - [ ] minstens één extra technologie
+  - [x] minstens één extra technologie  
+        ORM Prisma
   - [ ] maakt gebruik van de laatste ES-features (async/await, object destructuring, spread operator...)
   - [ ] duidelijke en volledige README.md
   - [ ] volledig en tijdig ingediend dossier en voldoende commits
@@ -138,15 +144,15 @@ IR: vreemde sleutel leverplaats verwijst naar _id_ uit _Dienst_, is verplicht
 
 - **datalaag**
 
-  - [ ] voldoende complex (meer dan één tabel, 2 een-op-veel of veel-op-veel relaties)
+  - [x] voldoende complex (meer dan één tabel, 2 een-op-veel of veel-op-veel relaties)
   - [ ] één module beheert de connectie + connectie wordt gesloten bij sluiten server
-  - [ ] heeft migraties - indien van toepassing
-  - [ ] heeft seeds
+  - [x] heeft migraties - indien van toepassing
+  - [x] heeft seeds
         <br />
 
 - **repositorylaag**
 
-  - [ ] definieert één repository per entiteit (niet voor tussentabellen) - indien van toepassing
+  - [x] definieert één repository per entiteit (niet voor tussentabellen) - indien van toepassing
   - [ ] mapt OO-rijke data naar relationele tabellen en vice versa - indien van toepassing
         <br />
 

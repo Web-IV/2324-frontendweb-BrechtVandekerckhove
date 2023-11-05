@@ -36,7 +36,7 @@ export default function VoegMaaltijdToe() {
           suggesties.maand === leverMaand && suggesties.vegie === vegie
       );
       maaltijd.suggestieVanDeMaandId = suggestieVanDeMaand.id;
-      maaltijd.suggestieVanDeMaandOmschrijving =
+      maaltijd.suggestieVanDeMaand =
         suggestieVanDeMaand.omschrijving;
     }
     return maaltijd;
