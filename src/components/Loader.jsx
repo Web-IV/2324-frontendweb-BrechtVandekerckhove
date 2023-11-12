@@ -2,7 +2,7 @@ import {Spin} from 'antd';
 
 export default function Loader() {
   return (
-    <div className="loader">
+    <div data-cy="loader" className="loader">
     <Spin/>
   </div>
   );

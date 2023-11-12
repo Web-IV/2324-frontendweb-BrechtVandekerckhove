@@ -1,0 +1,99 @@
+{
+  "items": [
+    {
+      "bestellingsnr": 4,
+      "besteldatum": "2023-11-20T00:00:00.000Z",
+      "medewerkerId": 2,
+      "medewerker": {
+        "id": 2,
+        "naam": "Balcaen",
+        "voornaam": "Melissa",
+        "email": "melissa.balcaen@uzgent.be",
+        "rollen": "[\"user\"]",
+        "debuggerienstId": 31,
+        "dienst": {
+          "id": 31,
+          "naam": "labo 24u"
+        }
+      },
+      "maaltijden": [
+        {
+          "id": 6,
+          "type": "broodmaaltijd",
+          "leverdatum": "2024-11-21T00:00:00.000Z",
+          "hoofdschotel": null,
+          "soep": "dagsoep",
+          "dessert": "fruit",
+          "typeSandwiches": "bruin",
+          "hartigBeleg": "jonge kaas",
+          "zoetBeleg": "choco",
+          "vetstof": "geen vetstof",
+          "leverplaatsId": 31,
+          "bestellingsnr": 4,
+          "suggestieVanDeMaandId": null,
+          "suggestieVanDeMaand": null,
+          "leverplaats": {
+            "id": 31,
+            "naam": "labo 24u"
+          }
+        }
+      ]
+    },
+    {
+      "bestellingsnr": 5,
+      "besteldatum": "2023-11-21T13:25:55.103Z",
+      "medewerkerId": 1,
+      "medewerker": {
+        "id": 1,
+        "naam": "Vandekerckhove",
+        "voornaam": "Brecht",
+        "email": "brecht.vandekerckhove@student.hogent.be",
+        "rollen": ["admin", "user"],
+        "dienstId": 31,
+        "dienst": { "id": 31, "naam": "labo 24u" }
+      },
+      "maaltijden": [
+        {
+          "id": 7,
+          "type": "warmeMaaltijd",
+          "leverdatum": "2024-11-21T12:23:46.789Z",
+          "hoofdschotel": "suggestie",
+          "soep": "dagsoep",
+          "dessert": "fruit",
+          "typeSandwiches": null,
+          "hartigBeleg": null,
+          "zoetBeleg": null,
+          "vetstof": null,
+          "leverplaatsId": 5,
+          "bestellingsnr": 5,
+          "suggestieVanDeMaandId": 7,
+          "suggestieVanDeMaand": {
+            "id": 7,
+            "maand": 4,
+            "vegie": false,
+            "omschrijving": "lamskoteletten met mintsaus"
+          },
+          "leverplaats": { "id": 5, "naam": "CHI07" }
+        },
+        {
+          "id": 8,
+          "type": "warmeMaaltijd",
+          "leverdatum": "2024-04-18T13:24:05.254Z",
+          "hoofdschotel": "vol-au-vent",
+          "soep": "dagsoep",
+          "dessert": "zuivel",
+          "typeSandwiches": null,
+          "hartigBeleg": null,
+          "zoetBeleg": null,
+          "vetstof": null,
+          "leverplaatsId": 39,
+          "bestellingsnr": 5,
+          "suggestieVanDeMaandId": null,
+          "suggestieVanDeMaand": null,
+          "leverplaats": { "id": 39, "naam": "PSY01" }
+        }
+      ]
+    }
+  ],
+  "count": 2
+}

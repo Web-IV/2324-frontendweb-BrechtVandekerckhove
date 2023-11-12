@@ -7,7 +7,10 @@ import dayjs from "dayjs";
 const vandaag = dayjs().startOf("day");
 const isVoorTienUur = dayjs().isBefore(vandaag.add(10, "hour"));
 
-export default function Datepicker({ huidigeDatumBewerkMaaltijd }) {
+export default function Datepicker({
+  datacyWaarde,
+  huidigeDatumBewerkMaaltijd,
+}) {
   const {
     data: leverdata = [],
     isLoading,
@@ -54,10 +57,11 @@ export default function Datepicker({ huidigeDatumBewerkMaaltijd }) {
       {!error ? (
         <DatePicker
           name="leverdatum"
+          data-cy={datacyWaarde}
           format="DD-MM-YYYY"
           disabledDate={leverdataReedsMaaltijdGepland}
           placeholder="Selecteer een datum"
-          style={{ width: "100%"}}
+          style={{ width: "100%" }}
         />
       ) : null}
     </AsyncData>

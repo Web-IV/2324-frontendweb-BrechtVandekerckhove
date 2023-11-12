@@ -17,7 +17,7 @@ export const hartigBelegOpties = [
   { value: "jonge kaas", label: "jonge kaas" },
   { value: "salami", label: "salami" },
   { value: "gekookte ham", label: "gekookte ham" },
-  { value: "surimisalada", label: "surimisalada" },
+  { value: "surimisalade", label: "surimisalade" },
   { value: "vegetarische salade", label: "vegetarische salade" },
 ];
 export const zoetBelegOpties= [

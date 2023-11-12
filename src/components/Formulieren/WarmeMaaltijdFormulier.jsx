@@ -15,7 +15,7 @@ import AsyncData from "../AsyncData.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
-const MySelect = ({ label, ...props }) => {
+const MySelect = ({ label, datacyWaarde , ...props }) => {
   const [field, meta] = useField(props);
 
   return (
@@ -28,8 +28,7 @@ const MySelect = ({ label, ...props }) => {
         validateStatus={meta.touched && meta.error ? "error" : null}
         help={meta.touched && meta.error ? meta.error : null}
       >
-        <Select {...field} {...props}></Select>
-       
+        <Select {...field} data-cy={datacyWaarde} {...props} virtual={false}></Select>
       </FormItem>
     </>
   );
@@ -60,66 +59,85 @@ export default function WarmeMaaltijdFormulier({
       {contextHolder}
       <AsyncData loading={isLoading} error={error}>
         {!error ? (
-      <Formik
-        initialValues={
-          initialValues
-            ? { ...initialValues }
-            : {
-                hoofdschotel: hoofdschotelOpties[0].value,
-                soep: soepOpties[0].value,
-                dessert: dessertOpties[0].value,
-                leverdatum: "",
-                leverplaats:"",
-              }
-        }
-        validationSchema={validation}
-        onSubmit={(data, { resetForm, setSubmitting }) => {
-          saveMaaltijd({
-            type: "warmeMaaltijd",
-            ...data,
-          });
-          resetForm();
-          setSubmitting(false);
-          showConfirmation();
-        }}
-      >
-        <Form>
-          <MySelect
-            label="Hoofdschotel"
-            name="hoofdschotel"
-            options={hoofdschotelOpties}
-          />
-          <MySelect label="Soep" name="soep" options={soepOpties} />
-          <MySelect label="Dessert" name="dessert" options={dessertOpties} />
-          <FormItem
-            name="leverdatum"
-            label="Leverdatum"
-            {...formItemLayout}
-            style={{ marginBottom: "10px" }}
+          <Formik
+            initialValues={
+              initialValues
+                ? { ...initialValues }
+                : {
+                    hoofdschotel: hoofdschotelOpties[0].value,
+                    soep: soepOpties[0].value,
+                    dessert: dessertOpties[0].value,
+                    leverdatum: "",
+                    leverplaats: "",
+                  }
+            }
+            validationSchema={validation}
+            onSubmit={(data, { resetForm, setSubmitting }) => {
+              saveMaaltijd({
+                type: "warmeMaaltijd",
+                ...data,
+              });
+              resetForm();
+              setSubmitting(false);
+              showConfirmation();
+            }}
           >
-            {initialValues ? (
-              <Datepicker
-                huidigeDatumBewerkMaaltijd={initialValues.leverdatum}
+            <Form>
+              <MySelect
+                label="Hoofdschotel"
+                name="hoofdschotel"
+                datacyWaarde="select_warmeMaaltijd_hoofdschotel"
+                options={hoofdschotelOpties}
               />
-            ) : (
-              <Datepicker />
-            )}
-          </FormItem>
+              <MySelect
+                label="Soep"
+                name="soep"
+                datacyWaarde="select_warmeMaaltijd_soep"
+                options={soepOpties}
+              />
+              <MySelect
+                label="Dessert"
+                name="dessert"
+                datacyWaarde="select_warmeMaaltijd_dessert"
+                options={dessertOpties}
+              />
+              <FormItem
+                name="leverdatum"
+                label="Leverdatum"
+               
+                {...formItemLayout}
+                style={{ marginBottom: "10px" }}
+              >
+                {initialValues ? (
+                  <Datepicker  datacyWaarde="select_warmeMaaltijd_leverdatum"
+                    huidigeDatumBewerkMaaltijd={initialValues.leverdatum}
+                  />
+                ) : (
+                  <Datepicker datacyWaarde="select_warmeMaaltijd_leverdatum"/>
+                )}
+              </FormItem>
 
-          <MySelect
-            label="Leverplaats"
-            name="leverplaats"
-            placeholder="Selecteer een dienst"
-            options={diensten.map((dienst) => ({
-              value: dienst.naam,
-              label: dienst.naam,
-            }))}
-          />
-          <SubmitButton disabled={false} className="blue">
-            Voeg toe
-          </SubmitButton>
-        </Form>
-      </Formik>): null}</AsyncData>
+              <MySelect
+                label="Leverplaats"
+                name="leverplaats"
+                datacyWaarde="select_warmeMaaltijd_leverplaats"
+                placeholder="Selecteer een dienst"
+                options={diensten.map((dienst) => ({
+                  value: dienst.naam,
+                  label: dienst.naam,
+                }))}
+              />
+              <SubmitButton
+                disabled={false}
+                data-cy="submit_warmeMaaltijd"
+                className="blue"
+              >
+                Voeg toe
+              </SubmitButton>
+            </Form>
+          </Formik>
+        ) : null}
+      </AsyncData>
     </div>
   );
 }

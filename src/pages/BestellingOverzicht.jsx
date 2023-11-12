@@ -38,7 +38,12 @@ export default function BestellingOverzicht() {
   const gefilterdeMaaltijden = useMemo(
     () =>
       bestellingen
-        .flatMap((bestelling) => bestelling.maaltijden)
+        .flatMap((bestelling) =>
+          bestelling.maaltijden.map((maaltijd) => ({
+            ...maaltijd,
+            medewerker: bestelling.medewerker,
+          }))
+        )
         .filter(
           (maaltijd) =>
             dayjs(maaltijd.leverdatum).format("DD-MM-YYYY") === zoekLeverdatum
@@ -74,11 +79,13 @@ export default function BestellingOverzicht() {
               <DatePicker
                 placeholder="Leverdatum"
                 format="DD-MM-YYYY"
+                data-cy="select_leverdatumMaaltijd"
                 onChange={(date, dateString) => setLeverdatum(dateString)}
               />
               <Button
                 type="primary"
                 className="blue"
+                data-cy="btn_zoekMaaltijd"
                 onClick={() => {
                   setZoekLeverdatum(leverdatum);
                 }}

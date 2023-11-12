@@ -54,14 +54,14 @@ export default function Winkelmandje() {
       render: (text, record, index) => (
         <div>
           <div>
-            <Button danger onClick={() => deleteMaaltijd(index)}>
+            <Button data-cy="btn_deleteMaaltijd" danger onClick={() => deleteMaaltijd(index)}>
               <DeleteOutlined />
               verwijder
             </Button>
           </div>
           <div>
             <Link to={`/winkelmandje/bewerk/${index}`}>
-              <Button type="default" style={{ marginTop: "10px" }}>
+              <Button data-cy ="btn_bewerkMaaltijd" type="default" style={{ marginTop: "10px" }}>
                 <EditOutlined />
                 Bewerk
               </Button>
@@ -82,7 +82,7 @@ export default function Winkelmandje() {
 
   return (
     <div style={{ width: "80%", margin: "auto" }}>
-      <Title level={2}>
+      <Title level={2} data-cy="aantalMaaltijden">
         Aantal maaltijden: {maaltijden ? maaltijden.length : 0}
       </Title>
 
@@ -127,7 +127,7 @@ export default function Winkelmandje() {
             //medewerkerId hier nog hard gecodeerd
             onClick={async () => {
               await saveBestelling({
-                medewerkerId: 1,
+                //medewerkerId: 1,
                 maaltijden: maaltijden,
               });
               localStorage.removeItem("maaltijden");

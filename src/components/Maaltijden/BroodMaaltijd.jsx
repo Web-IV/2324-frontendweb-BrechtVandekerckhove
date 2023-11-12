@@ -14,33 +14,33 @@ export default function BroodMaaltijd({
   bestellingsnr,
 }) {
   return (
-    <table>
+    <table data-cy="broodMaaltijd">
       <thead style={{ textAlign: "left" }}>
         <tr>
-          <th>{dateConverter(leverdatum)}: broodmaaltijd</th>
+          <th data-cy="broodMaaltijd_leverdatum_typeMaaltijd">{dateConverter(leverdatum)}: broodmaaltijd</th>
         </tr>
         <tr>
-          <td>Leverplaats: {leverplaats}</td>
+          <td data-cy="broodMaaltijd_leverplaats">Leverplaats: {leverplaats}</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Sandwiches: {typeSandwiches}</td>
+          <td data-cy="broodMaaltijd_sandwiches">Sandwiches: {typeSandwiches}</td>
         </tr>
         <tr>
-          <td>Hartig beleg: {hartigBeleg}</td>
+          <td data-cy="broodMaaltijd_hartigBeleg">Hartig beleg: {hartigBeleg}</td>
         </tr>
         <tr>
-          <td>Zoet beleg: {zoetBeleg}</td>
+          <td data-cy="broodMaaltijd_zoetBeleg">Zoet beleg: {zoetBeleg}</td>
         </tr>
         <tr>
-          <td>Vetstof: {vetstof}</td>
+          <td data-cy="broodMaaltijd_vetstof">Vetstof: {vetstof}</td>
         </tr>
         <tr>
-          <td>Soep: {soep}</td>
+          <td data-cy="broodMaaltijd_soep">Soep: {soep}</td>
         </tr>
         <tr>
-          <td>Dessert: {dessert}</td>
+          <td data-cy="broodMaaltijd_dessert">Dessert: {dessert}</td>
         </tr>
       </tbody>
     </table>

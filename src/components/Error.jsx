@@ -5,6 +5,7 @@ export default function Error({ error }) {
   if (isAxiosError(error)) {
     return (
       <Alert
+        data-cy="error"
         message="Oops, something went wrong"
         description={
           <p>

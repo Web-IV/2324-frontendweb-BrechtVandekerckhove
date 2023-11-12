@@ -16,7 +16,7 @@ import { getAll } from "../../api";
 import AsyncData from "../AsyncData.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
-const MySelect = ({ label, ...props }) => {
+const MySelect = ({ label, datacyWaarde, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
@@ -29,9 +29,13 @@ const MySelect = ({ label, ...props }) => {
         validateStatus={meta.touched && meta.error ? "error" : null}
         help={meta.touched && meta.error ? meta.error : null}
       >
-        <Select {...field} {...props}></Select>
+        <Select
+          {...field}
+          {...props}
+          data-cy={datacyWaarde}
+          virtual={false}
+        ></Select>
       </FormItem>
-      
     </>
   );
 };
@@ -72,7 +76,7 @@ export default function BroodMaaltijdFormulier({
                     vetstof: vetstofOpties[0].value,
                     dessert: dessertOpties[0].value,
                     leverdatum: "",
-                    leverplaats:"",
+                    leverplaats: "",
                   }
             }
             validationSchema={validation}
@@ -90,27 +94,37 @@ export default function BroodMaaltijdFormulier({
               <MySelect
                 label="Sandwiches"
                 name="typeSandwiches"
+                datacyWaarde="select_broodMaaltijd_sandwiches"
                 options={sandwichesOpties}
               />
-              <MySelect label="Soep" name="soep" options={soepOpties} />
+              <MySelect
+                label="Soep"
+                name="soep"
+                datacyWaarde="select_broodMaaltijd_soep"
+                options={soepOpties}
+              />
               <MySelect
                 label="Hartig beleg"
                 name="hartigBeleg"
+                datacyWaarde="select_broodMaaltijd_hartigBeleg"
                 options={hartigBelegOpties}
               />
               <MySelect
                 label="Zoet beleg"
                 name="zoetBeleg"
+                datacyWaarde="select_broodMaaltijd_zoetBeleg"
                 options={zoetBelegOpties}
               />
               <MySelect
                 label="Vetstof"
                 name="vetstof"
+                datacyWaarde="select_broodMaaltijd_vetstof"
                 options={vetstofOpties}
               />
               <MySelect
                 label="Dessert"
                 name="dessert"
+                datacyWaarde="select_broodMaaltijd_dessert"
                 options={dessertOpties}
               />
               <FormItem
@@ -121,22 +135,28 @@ export default function BroodMaaltijdFormulier({
               >
                 {initialValues ? (
                   <Datepicker
+                    datacyWaarde="select_broodMaaltijd_leverdatum"
                     huidigeDatumBewerkMaaltijd={initialValues.leverdatum}
                   />
                 ) : (
-                  <Datepicker />
+                  <Datepicker datacyWaarde="select_broodMaaltijd_leverdatum" />
                 )}
               </FormItem>
               <MySelect
                 label="Leverplaats"
                 name="leverplaats"
+                datacyWaarde="select_broodMaaltijd_leverplaats"
                 placeholder="Selecteer een dienst"
                 options={diensten.map((dienst) => ({
                   value: dienst.naam,
                   label: dienst.naam,
                 }))}
               />
-              <SubmitButton disabled={false} className="blue">
+              <SubmitButton
+                disabled={false}
+                className="blue"
+                data-cy="submit_broodMaaltijd"
+              >
                 Voeg toe
               </SubmitButton>
             </Form>

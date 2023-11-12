@@ -54,7 +54,7 @@ export default function Bestelling({
       dataIndex: "actions",
       key: "actions",
       render: () => (
-        <Button danger onClick={showDeleteConfirm}>
+        <Button data-cy="btn_deleteBestelling" danger onClick={showDeleteConfirm}>
           <DeleteOutlined />
           verwijder bestelling
         </Button>
@@ -74,6 +74,7 @@ export default function Bestelling({
   return (
     <div style={{ maxWidth: "800px" }}>
       <Table
+      data-cy="bestelling"
         columns={columns}
         showHeader={false}
         pagination={false}

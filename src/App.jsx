@@ -30,8 +30,9 @@ function App() {
             },
             {
               key: "4",
-              label: <Link to="/winkelmandje">Winkelmandje</Link>,
+              label: <Link to="/winkelmandje" data-cy="button_winkelmandje">Winkelmandje</Link>,
               icon: <ShoppingCartOutlined />,
+              
             },
           ]}
         />

@@ -54,6 +54,7 @@ export default function VoegMaaltijdToe() {
       <Space wrap size="large">
         <Button
           type="primary"
+          data-cy="btn_warmeMaaltijd"
           onClick={() => setWarmeMaaltijdFormulier(true)}
           className={warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
           style={{ width: "150px" }}
@@ -63,6 +64,7 @@ export default function VoegMaaltijdToe() {
         </Button>
         <Button
           type="primary"
+          data-cy="btn_broodMaaltijd"
           onClick={() => setWarmeMaaltijdFormulier(false)}
           className={!warmeMaaltijdFormulier ? "blue " : "blue nonActiveButton"}
   

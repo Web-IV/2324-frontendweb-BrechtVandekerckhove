@@ -15,31 +15,31 @@ export default function WarmeMaaltijd({
 }) {
 
   return (
-    <table>
+    <table data-cy="warmeMaaltijd">
       <thead style={{ textAlign: "left" }}>
         <tr>
-          <th>{dateConverter(leverdatum)}: warme maaltijd</th>
+          <th data-cy="warmeMaaltijd_leverdatum_typeMaaltijd">{dateConverter(leverdatum)}: warme maaltijd</th>
         </tr>
         <tr>
-          <td>Leverplaats: {leverplaats}</td>
+          <td data-cy="warmeMaaltijd_leverplaats">Leverplaats: {leverplaats}</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Hoofdschotel: {hoofdschotel}</td>
+          <td data-cy="warmeMaaltijd_hoofdschotel">Hoofdschotel: {hoofdschotel}</td>
         </tr>
         {suggestieVanDeMaandOmschrijving ? (
           <tr>
-            <td>
+            <td data-cy="warmeMaaltijd_suggestieVanDeMaandOmschrijving">
               Omschrijving: {suggestieVanDeMaandOmschrijving}
             </td>
           </tr>
         ) : null}
         <tr>
-          <td>Soep: {soep}</td>
+          <td data-cy="warmeMaaltijd_soep">Soep: {soep}</td>
         </tr>
         <tr>
-          <td>Dessert: {dessert}</td>
+          <td data-cy="warmeMaaltijd_dessert">Dessert: {dessert}</td>
         </tr>
       </tbody>
     </table>
