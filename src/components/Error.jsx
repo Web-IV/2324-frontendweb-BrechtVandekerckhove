@@ -3,13 +3,14 @@ import { Alert } from "antd";
 
 export default function Error({ error }) {
   if (isAxiosError(error)) {
+    console.log(error);
     return (
       <Alert
         data-cy="error"
         message="Oops, something went wrong"
         description={
           <p>
-            {error.data?.message || error.message}
+            {error.response.data?.message || error.message}
             {error.data?.details && (
               <>
                 :

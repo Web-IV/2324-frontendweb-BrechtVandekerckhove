@@ -1,9 +1,10 @@
-import {Spin} from 'antd';
+import { Spin } from "antd";
 
-export default function Loader() {
+export default function Loader({ message }) {
   return (
     <div data-cy="loader" className="loader">
-    <Spin/>
-  </div>
+      <Spin />
+      <p>{message}</p>
+    </div>
   );
 }

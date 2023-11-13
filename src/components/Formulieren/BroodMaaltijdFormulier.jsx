@@ -1,5 +1,5 @@
-import { Formik, Form, useField } from "formik";
-import { Select, FormItem, SubmitButton } from "formik-antd";
+import { Formik, Form } from "formik";
+import {  FormItem, SubmitButton } from "formik-antd";
 import { message } from "antd";
 import {
   hartigBelegOpties,
@@ -14,31 +14,10 @@ import Datepicker from "./Componenten/Datepicker.jsx";
 import useSWR from "swr";
 import { getAll } from "../../api";
 import AsyncData from "../AsyncData.jsx";
+import MySelect from "./Componenten/MySelect.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
-const MySelect = ({ label, datacyWaarde, ...props }) => {
-  const [field, meta] = useField(props);
 
-  return (
-    <>
-      <FormItem
-        name={label}
-        label={label}
-        {...formItemLayout}
-        style={{ marginBottom: "10px" }}
-        validateStatus={meta.touched && meta.error ? "error" : null}
-        help={meta.touched && meta.error ? meta.error : null}
-      >
-        <Select
-          {...field}
-          {...props}
-          data-cy={datacyWaarde}
-          virtual={false}
-        ></Select>
-      </FormItem>
-    </>
-  );
-};
 
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
@@ -131,7 +110,7 @@ export default function BroodMaaltijdFormulier({
                 name="leverdatum"
                 label="Leverdatum"
                 {...formItemLayout}
-                style={{ marginBottom: "10px" }}
+                className="formMargin"
               >
                 {initialValues ? (
                   <Datepicker

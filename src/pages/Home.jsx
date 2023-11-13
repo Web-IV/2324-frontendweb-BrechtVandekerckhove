@@ -10,7 +10,7 @@ import { getAll } from "../api";
 
 const { Title } = Typography;
 
-export default function VoegMaaltijdToe() {
+export default function Home() {
   const [warmeMaaltijdFormulier, setWarmeMaaltijdFormulier] = useState(true);
   const {
     data: suggesties = [],

@@ -20,14 +20,19 @@ body {
 .blue {
   background-color: #0269c9;
 }
-.nonActiveButton{
+.blueText {
+  color: #0269c9;
+}
+.formMargin {
+  margin-bottom: 10px;
+}
+.nonActiveButton {
   opacity: 0.8;
 }
 .header {
   height: 150px;
-  line-height: 130px;
+  line-height: 80px;
   background-color: transparent;
-
 }
 .content {
   margin: 50px;
@@ -36,4 +41,20 @@ body {
   margin: 10px 0;
   border-color: #0269c9;
   border-width: 5px;
+}
+.login-form {
+  max-width: 400px;
+  margin: auto;
+}
+.login-form-button {
+  width: 45%;
+}
+.login-form-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout{
+  display: flex;
+  justify-content: center;
 }

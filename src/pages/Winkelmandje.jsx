@@ -20,7 +20,7 @@ import { Outlet } from "react-router-dom";
 
 const { Title } = Typography;
 
-export default function WinkelmandjePagina() {
+export default function Winkelmandje() {
 
   return (
     <div style={{ width: "80%", margin: "auto" }}>

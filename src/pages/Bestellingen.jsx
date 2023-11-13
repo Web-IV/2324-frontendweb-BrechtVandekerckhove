@@ -20,7 +20,7 @@ function BestellingTabel({ bestellingen, onDelete }) {
   ));
 }
 
-export default function BestellingOverzicht() {
+export default function Bestellingen() {
   const {
     data: bestellingen = [],
     isLoading,

@@ -12,27 +12,11 @@ import Datepicker from "./Componenten/Datepicker.jsx";
 import useSWR from "swr";
 import { getAll } from "../../api";
 import AsyncData from "../AsyncData.jsx";
+import MySelect from "./Componenten/MySelect.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
-const MySelect = ({ label, datacyWaarde , ...props }) => {
-  const [field, meta] = useField(props);
 
-  return (
-    <>
-      <FormItem
-        name={label}
-        label={label}
-        {...formItemLayout}
-        style={{ marginBottom: "10px" }}
-        validateStatus={meta.touched && meta.error ? "error" : null}
-        help={meta.touched && meta.error ? meta.error : null}
-      >
-        <Select {...field} data-cy={datacyWaarde} {...props} virtual={false}></Select>
-      </FormItem>
-    </>
-  );
-};
 
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
@@ -106,7 +90,8 @@ export default function WarmeMaaltijdFormulier({
                 label="Leverdatum"
                
                 {...formItemLayout}
-                style={{ marginBottom: "10px" }}
+                className="formMargin"
+              
               >
                 {initialValues ? (
                   <Datepicker  datacyWaarde="select_warmeMaaltijd_leverdatum"

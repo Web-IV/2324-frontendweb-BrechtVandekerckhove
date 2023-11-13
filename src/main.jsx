@@ -2,14 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+import { Navigate } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import BestellingOverzicht from "./pages/BestellingOverzicht.jsx";
-import VoegMaaltijdToe from "./pages/voegMaaltijdToe.jsx";
-import WinkelmandjePagina from "./pages/WinkelmandjePagina.jsx";
+import BestellingenPagina from "./pages/Bestellingen.jsx";
+import HomePagina from "./pages/Home.jsx";
+import WinkelmandjePagina from "./pages/Winkelmandje.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import BewerkMaaltijd from "./components/Winkelmandje/BewerkMaaltijd.jsx";
 import Winkelmandje from "./components/Winkelmandje/WinkelmandjeOverzicht.jsx";
-
+import { AuthProvider } from "./contexts/Auth.context";
+import Login from "./pages/Login.jsx";
+import Logout from "./pages/Logout.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,24 +21,43 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <VoegMaaltijdToe />,
+        element: <Navigate replace to="/maaltijdkeuze" />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
+      },
+      {
+        path: "/maaltijdkeuze",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <HomePagina /> }],
       },
       {
         path: "bestellingen",
-        element: <BestellingOverzicht />,
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <BestellingenPagina /> }],
       },
       {
         path: "winkelmandje",
-        element: <WinkelmandjePagina />,
+        element: <PrivateRoute />,
         children: [
           {
-            path: "",
-            index: true,
-            element: <Winkelmandje />,
-          },
-          {
-            path: "bewerk/:id",
-            element: <BewerkMaaltijd />,
+            element: <WinkelmandjePagina />,
+            children: [
+              {
+                path: "",
+                index: true,
+                element: <Winkelmandje />,
+              },
+              {
+                path: "bewerk/:id",
+                element: <BewerkMaaltijd />,
+              },
+            ],
           },
         ],
       },
@@ -52,6 +75,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
