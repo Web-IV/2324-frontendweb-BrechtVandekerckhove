@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Typography, Button, Space } from "antd";
-import BroodMaaltijdFormulier from "../Formulieren/BroodmaaltijdFormulier";
+import BroodMaaltijdFormulier from "../Formulieren/BroodMaaltijdFormulier";
 import WarmeMaaltijdFormulier from "../Formulieren/WarmeMaaltijdFormulier";
 import NotFound from "../../pages/NotFound";
 
