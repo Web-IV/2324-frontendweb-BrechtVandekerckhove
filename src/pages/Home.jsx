@@ -1,7 +1,7 @@
 import SuggestieLijst from "../components/Suggesties/SuggestieLijst";
 import { Button, Space } from "antd";
 import { useState } from "react";
-import BroodMaaltijdFormulier from "../components/Formulieren/BroodmaaltijdFormulier";
+import BroodMaaltijdFormulier from "../components/Formulieren/BroodMaaltijdFormulier";
 import WarmeMaaltijdFormulier from "../components/Formulieren/WarmeMaaltijdFormulier";
 import { Typography } from "antd";
 import dayjs from "dayjs";
