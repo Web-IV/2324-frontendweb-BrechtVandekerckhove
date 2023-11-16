@@ -1,5 +1,5 @@
 import { Formik, Form } from "formik";
-import {  FormItem, SubmitButton } from "formik-antd";
+import { FormItem, SubmitButton } from "formik-antd";
 import { message } from "antd";
 import {
   hartigBelegOpties,
@@ -18,7 +18,6 @@ import MySelect from "./Componenten/MySelect.jsx";
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
-
 const validation = Yup.object().shape({
   leverdatum: Yup.date().required("Leverdatum is verplicht"),
   leverplaats: Yup.string().required("Leverplaats is verplicht"),
@@ -27,6 +26,7 @@ const validation = Yup.object().shape({
 export default function BroodMaaltijdFormulier({
   saveMaaltijd,
   initialValues,
+  dienstnaam,
 }) {
   const [messageApi, contextHolder] = message.useMessage();
   const showConfirmation = () => {
@@ -55,7 +55,7 @@ export default function BroodMaaltijdFormulier({
                     vetstof: vetstofOpties[0].value,
                     dessert: dessertOpties[0].value,
                     leverdatum: "",
-                    leverplaats: "",
+                    leverplaats: dienstnaam,
                   }
             }
             validationSchema={validation}

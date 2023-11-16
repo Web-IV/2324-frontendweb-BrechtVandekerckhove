@@ -10,7 +10,7 @@ import useSWRMutation from "swr/mutation";
 import * as api from "../api";
 
 const JWT_TOKEN_KEY = "jwtToken";
-const MEDEWERKER_ID_KEY = "medewerkerId";
+export const MEDEWERKER_ID_KEY = "medewerkerId";
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -24,15 +24,29 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     api.setAuthToken(token);
     setIsAuthed(Boolean(token));
+
     setReady(true);
   }, [token]);
 
   const {
-    isMutating: loading,
-    error,
+    isMutating: loginLoading,
+    error: loginError,
     trigger: doLogin,
   } = useSWRMutation("medewerkers/login", api.post);
 
+  const {
+    isMutating: registerLoading,
+    error: registerError,
+    trigger: doRegister,
+  } = useSWRMutation("medewerkers/register", api.post);
+
+  const setSession = useCallback((token, medewerker) => {
+    setToken(token);
+    setMedewerker(medewerker);
+
+    localStorage.setItem(JWT_TOKEN_KEY, token);
+    localStorage.setItem(MEDEWERKER_ID_KEY, medewerker.id);
+  }, []);
   const login = useCallback(
     async (email, wachtwoord) => {
       try {
@@ -41,11 +55,7 @@ export const AuthProvider = ({ children }) => {
           wachtwoord,
         });
 
-        setToken(token);
-        await setMedewerker(medewerker);
-
-        localStorage.setItem(JWT_TOKEN_KEY, token);
-        localStorage.setItem(MEDEWERKER_ID_KEY, medewerker.id);
+        setSession(token, medewerker);
 
         return true;
       } catch (error) {
@@ -54,6 +64,34 @@ export const AuthProvider = ({ children }) => {
       }
     },
     [doLogin]
+  );
+
+  const register = useCallback(
+    async (
+      voornaam,
+      naam,
+      email,
+      dienst,
+      wachtwoord,
+      bevestigingWachtwoord
+    ) => {
+      try {
+        const { token, medewerker } = await doRegister({
+          voornaam,
+          naam,
+          email,
+          dienst,
+          wachtwoord,
+          bevestigingWachtwoord,
+        });
+        setSession(token, medewerker);
+        return true;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
+    [doRegister, setSession]
   );
 
   const logout = useCallback(() => {
@@ -68,14 +106,26 @@ export const AuthProvider = ({ children }) => {
     () => ({
       token,
       medewerker,
-      error,
+      error: loginError || registerError,
       ready,
-      loading,
+      loading: loginLoading || registerLoading,
       isAuthed,
       login,
+      register,
       logout,
     }),
-    [token, medewerker, error, ready, loading, isAuthed, login, logout]
+    [
+      token,
+      medewerker,
+      loginError,
+      registerError,
+      ready,
+      loginLoading,
+      isAuthed,
+      login,
+      register,
+      logout,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

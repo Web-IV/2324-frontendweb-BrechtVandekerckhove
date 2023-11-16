@@ -42,14 +42,18 @@ body {
   border-color: #0269c9;
   border-width: 5px;
 }
-.login-form {
+.form {
   max-width: 400px;
   margin: auto;
 }
-.login-form-button {
+.form-button {
   width: 45%;
 }
-.login-form-button-container {
+.form-profiel{
+  max-width: 400px;
+
+}
+.form-button-container {
   display: flex;
   justify-content: space-between;
 }

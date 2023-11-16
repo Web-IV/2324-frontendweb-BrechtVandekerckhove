@@ -1,8 +1,8 @@
 import { Formik, Form, Field } from "formik";
 import { Input, SubmitButton, FormItem, ResetButton } from "formik-antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import {  LockOutlined,MailOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
-import { useCallback } from "react";
+import { useCallback,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Auth.context";
 import Error from "../components/Error";
@@ -19,9 +19,18 @@ const validation = Yup.object().shape({
 export default function Login() {
   const { error, loading, login } = useAuth();
   const navigate = useNavigate();
+  const { isAuthed } = useAuth();
+  
+  useEffect(() => {
+    if (isAuthed) {
+      // Redirect to home page if the user is already authenticated
+      navigate("/");
+    }
+  }, [isAuthed, navigate]);
 
   const handleLogin = useCallback(
     async ({ email, wachtwoord }) => {
+   
       const loggedIn = await login(email, wachtwoord);
 
       if (loggedIn) {
@@ -42,13 +51,13 @@ export default function Login() {
       validationSchema={validation}
       onSubmit={handleLogin}
     >
-      <Form className="login-form">
+      <Form className="form">
         <FormItem className="formMargin" name="email">
           <Field
             name="email"
             type="email"
             as={Input}
-            prefix={<UserOutlined className="site-form-item-icon" />}
+            prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="E-mail"
             size="large"
             rules={[
@@ -75,25 +84,25 @@ export default function Login() {
             ]}
           />
         </FormItem>{" "}
-        <div className="login-form-button-container">
+        <div className="form-button-container">
           <SubmitButton
             type="primary"
             size="large"
             disabled={loading}
-            className="login-form-button blue formMargin"
+            className="form-button blue formMargin"
           >
             Log in
           </SubmitButton>{" "}
           <ResetButton
             type="primary"
             size="large"
-            className="login-form-button formMargin blue"
+            className="form-button formMargin blue"
           >
             Reset
           </ResetButton>
         </div>
         Nieuw?{"  "}
-        <Link to="/registreer" className="blueText ">
+        <Link to="/register" className="blueText ">
           Registreer hier!
         </Link>
         <Error error={error} />

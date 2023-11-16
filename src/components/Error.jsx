@@ -10,7 +10,7 @@ export default function Error({ error }) {
         message="Oops, something went wrong"
         description={
           <p>
-            {error.response.data?.message || error.message}
+            {error.response?.data?.message || error.message}
             {error.data?.details && (
               <>
                 :

@@ -1,5 +1,5 @@
-import { Formik, Form, useField } from "formik";
-import { Select, FormItem, SubmitButton } from "formik-antd";
+import { Formik, Form } from "formik";
+import { FormItem, SubmitButton } from "formik-antd";
 import { message } from "antd";
 import {
   hoofdschotelOpties,
@@ -25,6 +25,7 @@ const validation = Yup.object().shape({
 
 export default function WarmeMaaltijdFormulier({
   saveMaaltijd,
+  dienstnaam,
   initialValues,
 }) {
   const [messageApi, contextHolder] = message.useMessage();
@@ -35,7 +36,7 @@ export default function WarmeMaaltijdFormulier({
       duration: 3,
     });
   };
-
+ 
   const { data: diensten = [], isLoading, error } = useSWR("diensten", getAll);
 
   return (
@@ -52,7 +53,7 @@ export default function WarmeMaaltijdFormulier({
                     soep: soepOpties[0].value,
                     dessert: dessertOpties[0].value,
                     leverdatum: "",
-                    leverplaats: "",
+                    leverplaats: dienstnaam
                   }
             }
             validationSchema={validation}

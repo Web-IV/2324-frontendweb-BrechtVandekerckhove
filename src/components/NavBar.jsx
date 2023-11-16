@@ -20,14 +20,8 @@ export default function NavBar() {
           label: <Link to="/bestellingen">Bestellingen</Link>,
         },
         {
-          key: "profiel",
-          label: isAuthed ? (
-            <Link to="/profiel" style={{ color: "black" }}>
-              Welkom
-            </Link>
-          ) : (
-            <Link to="/login">Login</Link>
-          ),
+          key: "welkomLogin",
+          label: isAuthed ? "Welkom" : <Link to="/login">Login</Link>,
           icon: <UserOutlined style={{ color: "black" }} />,
           style: { marginLeft: "auto" },
           children: isAuthed

@@ -21,6 +21,14 @@ export async function getAll(url) {
 export const deleteByBestellingsnr = async (url, { arg: bestellingsnr }) => {
   await axios.delete(`${baseUrl}/${url}/${bestellingsnr}`);
 };
+export const getById = async (url, id) => {
+  const { data } = await axios.get(`${baseUrl}/${url}/${id}`);
+  return data;
+};
+export const update = async (url,  id, {arg:newData} ) => {
+  const { data } =  await axios.put(`${baseUrl}/${url}/${id}`, newData);
+  return data;
+};
 export const save = async (url, { arg: body }) => {
   await axios.post(`${baseUrl}/${url}`, body);
 };

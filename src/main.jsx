@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BestellingenPagina from "./pages/Bestellingen.jsx";
 import HomePagina from "./pages/Home.jsx";
 import WinkelmandjePagina from "./pages/Winkelmandje.jsx";
+import Profiel from "./pages/Profiel.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import BewerkMaaltijd from "./components/Winkelmandje/BewerkMaaltijd.jsx";
 import Winkelmandje from "./components/Winkelmandje/WinkelmandjeOverzicht.jsx";
@@ -14,6 +15,8 @@ import { AuthProvider } from "./contexts/Auth.context";
 import Login from "./pages/Login.jsx";
 import Logout from "./pages/Logout.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import Register from "./pages/Register.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
         element: <Logout />,
       },
       {
+        path: "/register",
+        element: <Register />,
+      },
+      {
         path: "/maaltijdkeuze",
         element: <PrivateRoute />,
         children: [{ index: true, element: <HomePagina /> }],
@@ -40,6 +47,11 @@ const router = createBrowserRouter([
         path: "bestellingen",
         element: <PrivateRoute />,
         children: [{ index: true, element: <BestellingenPagina /> }],
+      },
+      {
+        path: "profiel",
+        element: <PrivateRoute />,
+        children: [{ index: true, element: <Profiel /> }],
       },
       {
         path: "winkelmandje",
