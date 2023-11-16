@@ -23,3 +23,26 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("login", (email, wachtwoord) => {
+  Cypress.log({
+    displayName: "login",
+  });
+
+  cy.intercept("/api/medewerkers/login").as("login");
+  cy.visit("http://localhost:5173/login");
+  cy.get("[data-cy=email_input]").clear().type(email);
+  cy.get("[data-cy=wachtwoord_input]").clear().type(wachtwoord);
+  cy.get("[data-cy=submit_btn]").click();
+  cy.wait("@login");
+});
+
+Cypress.Commands.add("logout", () => {
+  Cypress.log({
+    displayName: "logout",
+  });
+
+  cy.visit("http://localhost:5173/");
+  cy.get("[datacy=btn_welkomLogin]").click();
+  cy.get("[data-cy=btn_logout]").click();
+});

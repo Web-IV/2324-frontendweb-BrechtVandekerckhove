@@ -1,6 +1,9 @@
 import { recurse } from "cypress-recurse";
 
 describe("voeg broodmaaltijd toe aan winkelmandje en bewerk zoet beleg", () => {
+  beforeEach(() => {
+    cy.login("brecht.vandekerckhove@student.hogent.be", "12345678");
+  });
   it("zoet beleg aangepast", () => {
     cy.visit("http://localhost:5173/");
 

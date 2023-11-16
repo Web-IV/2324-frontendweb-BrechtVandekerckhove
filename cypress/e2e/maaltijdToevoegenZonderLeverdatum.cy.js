@@ -1,6 +1,10 @@
 import { recurse } from "cypress-recurse";
 
 describe("maaltijd toevoegen zonder leverdatum: foutboodschap en geen niet toegevoegd aan winkelmandje", () => {
+  beforeEach(() => {
+    cy.login("brecht.vandekerckhove@student.hogent.be", "12345678");
+  });
+
   it("foutboodschap en 0 maaltijden in winkelmandje", () => {
     cy.visit("http://localhost:5173/");
 

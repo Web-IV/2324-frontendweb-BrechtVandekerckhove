@@ -15,8 +15,10 @@ import { useAuth } from "../contexts/Auth.context";
 import AsyncData from "../components/AsyncData";
 import { Link } from "react-router-dom";
 import useSWR from "swr";
-
+import { Typography } from "antd";
 import { getAll } from "../api";
+
+const { Title } = Typography;
 
 const validation = Yup.object().shape({
   voornaam: Yup.string().required("Voornaam is verplicht!"),
@@ -81,131 +83,136 @@ export default function Register() {
       error={dienstenError || errorRegister}
     >
       {!(dienstenError || errorRegister) ? (
-        <Formik
-          initialValues={{
-            voornaam: "",
-            naam: "",
-            email: "",
-            dienst: "",
-            wachtwoord: "",
-            bevestigingWachtwoord: "",
-          }}
-          validationSchema={validation}
-          onSubmit={handleRegister}
-        >
-          <Form className="form">
-            <FormItem className="formMargin" name="voornaam">
-              <Field
-                name="voornaam"
-                type="text"
-                as={Input}
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Voornaam"
-                size="large"
-                rules={[
-                  {
-                    required: true,
-                    message: "Voornaam is verplicht!",
-                  },
-                ]}
-              />
-            </FormItem>
-            <FormItem className="formMargin" name="naam">
-              <Field
-                name="naam"
-                type="text"
-                as={Input}
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Naam"
-                size="large"
-                rules={[
-                  {
-                    required: true,
-                    message: "Naam is verplicht!",
-                  },
-                ]}
-              />
-            </FormItem>
-            <FormItem className="formMargin" name="email">
-              <Field
-                name="email"
-                type="email"
-                as={Input}
-                prefix={<MailOutlined className="site-form-item-icon" />}
-                placeholder="E-mail"
-                size="large"
-                rules={[
-                  {
-                    required: true,
-                    message: "E-mail is verplicht!",
-                  },
-                ]}
-              />
-            </FormItem>
-            <FormItem className="formMargin" name="dienst">
-              <Select
-                name="dienst"
-                placeholder="Selecteer een dienst"
-                options={diensten.map((dienst) => ({
-                  value: dienst.naam,
-                  label: dienst.naam,
-                }))}
-              ></Select>
-            </FormItem>
-            <FormItem className="formMargin" name="wachtwoord">
-              <Field
-                name="wachtwoord"
-                type="password"
-                as={Input}
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                placeholder="Wachtwoord"
-                size="large"
-                rules={[
-                  {
-                    required: true,
-                    message: "Wachtwoord is verplicht!",
-                  },
-                ]}
-              />
-            </FormItem>{" "}
-            <FormItem className="formMargin" name="bevestigingWachtwoord">
-              <Field
-                name="bevestigingWachtwoord"
-                type="password"
-                as={Input}
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                placeholder="Bevestig je wachtwoord"
-                size="large"
-                rules={[
-                  {
-                    required: true,
-                    message: "Wachtwoord is verplicht!",
-                  },
-                ]}
-              />
-            </FormItem>{" "}
-            <div className="form-button-container">
-              <SubmitButton
-                type="primary"
-                size="large"
-                className="form-button blue formMargin"
-              >
-                Registreer
-              </SubmitButton>{" "}
-              <ResetButton
-                type="primary"
-                size="large"
-                className="form-button formMargin blue"
-              >
-                Reset
-              </ResetButton>
-            </div>
-            Reeds een account?{"  "}
-            <Link to="/login" className="blueText ">
-              Log hier in!
-            </Link>
-          </Form>
-        </Formik>
+        <>
+          <Title level={1} style={{ textAlign: "center"}}>
+            Registreren
+          </Title>
+          <Formik
+            initialValues={{
+              voornaam: "",
+              naam: "",
+              email: "",
+              dienst: "",
+              wachtwoord: "",
+              bevestigingWachtwoord: "",
+            }}
+            validationSchema={validation}
+            onSubmit={handleRegister}
+          >
+            <Form className="form">
+              <FormItem className="formMargin" name="voornaam">
+                <Field
+                  name="voornaam"
+                  type="text"
+                  as={Input}
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Voornaam"
+                  size="large"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Voornaam is verplicht!",
+                    },
+                  ]}
+                />
+              </FormItem>
+              <FormItem className="formMargin" name="naam">
+                <Field
+                  name="naam"
+                  type="text"
+                  as={Input}
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Naam"
+                  size="large"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Naam is verplicht!",
+                    },
+                  ]}
+                />
+              </FormItem>
+              <FormItem className="formMargin" name="email">
+                <Field
+                  name="email"
+                  type="email"
+                  as={Input}
+                  prefix={<MailOutlined className="site-form-item-icon" />}
+                  placeholder="E-mail"
+                  size="large"
+                  rules={[
+                    {
+                      required: true,
+                      message: "E-mail is verplicht!",
+                    },
+                  ]}
+                />
+              </FormItem>
+              <FormItem className="formMargin" name="dienst">
+                <Select
+                  name="dienst"
+                  placeholder="Selecteer een dienst"
+                  options={diensten.map((dienst) => ({
+                    value: dienst.naam,
+                    label: dienst.naam,
+                  }))}
+                ></Select>
+              </FormItem>
+              <FormItem className="formMargin" name="wachtwoord">
+                <Field
+                  name="wachtwoord"
+                  type="password"
+                  as={Input}
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  placeholder="Wachtwoord"
+                  size="large"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Wachtwoord is verplicht!",
+                    },
+                  ]}
+                />
+              </FormItem>{" "}
+              <FormItem className="formMargin" name="bevestigingWachtwoord">
+                <Field
+                  name="bevestigingWachtwoord"
+                  type="password"
+                  as={Input}
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  placeholder="Bevestig je wachtwoord"
+                  size="large"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Wachtwoord is verplicht!",
+                    },
+                  ]}
+                />
+              </FormItem>{" "}
+              <div className="form-button-container">
+                <SubmitButton
+                  type="primary"
+                  size="large"
+                  className="form-button blue formMargin"
+                >
+                  Registreer
+                </SubmitButton>{" "}
+                <ResetButton
+                  type="primary"
+                  size="large"
+                  className="form-button formMargin blue"
+                >
+                  Reset
+                </ResetButton>
+              </div>
+              Reeds een account?{"  "}
+              <Link to="/login" className="blueText ">
+                Log hier in!
+              </Link>
+            </Form>
+          </Formik>
+        </>
       ) : null}
     </AsyncData>
   );

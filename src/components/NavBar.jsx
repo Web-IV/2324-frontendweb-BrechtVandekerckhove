@@ -20,6 +20,7 @@ export default function NavBar() {
           label: <Link to="/bestellingen">Bestellingen</Link>,
         },
         {
+          datacy: "btn_welkomLogin",
           key: "welkomLogin",
           label: isAuthed ? "Welkom" : <Link to="/login">Login</Link>,
           icon: <UserOutlined style={{ color: "black" }} />,
@@ -32,7 +33,7 @@ export default function NavBar() {
                 },
                 {
                   key: "uitloggen",
-                  label: <Link to="/logout">Uitloggen</Link>,
+                  label: <Link to="/logout" data-cy="btn_logout">Uitloggen</Link>,
                 },
               ]
             : null,

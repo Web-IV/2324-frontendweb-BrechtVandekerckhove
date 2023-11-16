@@ -1,6 +1,10 @@
 import { recurse } from "cypress-recurse";
 
 describe("twee maaltijden toevoegen, tweede zelfde leverdatum selecteren als eerste = onmogelijk", () => {
+  beforeEach(() => {
+    cy.login("brecht.vandekerckhove@student.hogent.be", "12345678");
+  });
+ 
   it("fout bij selecteren zelfde leverdatum", () => {
     cy.visit("http://localhost:5173/");
 

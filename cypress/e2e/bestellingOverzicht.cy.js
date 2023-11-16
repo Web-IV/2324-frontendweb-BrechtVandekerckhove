@@ -1,6 +1,10 @@
 import { recurse } from "cypress-recurse";
 
 describe("Bestelling overzicht", () => {
+  beforeEach(() => {
+    cy.login("brecht.vandekerckhove@student.hogent.be", "12345678");
+  });
+
   it("Toont 2 bestellingen met totaal 3 maaltijden in", () => {
     cy.visit("http://localhost:5173/bestellingen");
     cy.intercept("GET", "http://localhost:9000/api/bestellingen", {
@@ -11,6 +15,8 @@ describe("Bestelling overzicht", () => {
     // aantal bestellingen
     cy.get("[data-cy=bestelling]").should("have.length", 2);
   });
+ 
+
   it("laadindicator wordt getoond bij trage response", () => {
     cy.intercept("http://localhost:9000/api/bestellingen", (req) => {
       req.on("response", (res) => {
@@ -60,7 +66,10 @@ describe("Bestelling overzicht", () => {
       .find("[data-cy=warmeMaaltijd_leverdatum_typeMaaltijd]")
       .invoke("text")
       .should("eq", "18-4-2024: warme maaltijd");
-    cy.get(".ant-table-cell.medewerker").eq(1).invoke("text").should("eq","Brecht Vandekerckhove");
+    cy.get(".ant-table-cell.medewerker")
+      .eq(1)
+      .invoke("text")
+      .should("eq", "Brecht Vandekerckhove");
   });
 
   it("zoekfunctie toont twee correcte maaltijden en correcte namen", () => {
@@ -106,10 +115,15 @@ describe("Bestelling overzicht", () => {
       .find("[data-cy=broodMaaltijd_leverdatum_typeMaaltijd]")
       .invoke("text")
       .should("eq", "21-11-2024: broodmaaltijd");
-      //correcte namen
-      cy.get(".ant-table-cell.medewerker").eq(1).invoke("text").should("eq","Melissa Balcaen");
-      cy.get(".ant-table-cell.medewerker").eq(2).invoke("text").should("eq","Brecht Vandekerckhove");
-     
+    //correcte namen
+    cy.get(".ant-table-cell.medewerker")
+      .eq(1)
+      .invoke("text")
+      .should("eq", "Melissa Balcaen");
+    cy.get(".ant-table-cell.medewerker")
+      .eq(2)
+      .invoke("text")
+      .should("eq", "Brecht Vandekerckhove");
   });
 
   it("zoekfunctie toont geen maaltijd bij leverdatum zonder match", () => {
@@ -154,8 +168,6 @@ describe("Bestelling overzicht", () => {
       statusCode: 404,
     });
     cy.get("[data-cy=error]").should("exist");
-    cy.get("[data-cy=error]").contains("404")
-
-
+    cy.get("[data-cy=error]").contains("404");
   });
 });
