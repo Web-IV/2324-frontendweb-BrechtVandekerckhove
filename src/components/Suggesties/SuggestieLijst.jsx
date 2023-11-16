@@ -1,4 +1,3 @@
-
 import SuggestieVanDeMaand from "./SuggestieVanDeMaand";
 import { Typography } from "antd";
 import AsyncData from "../AsyncData";

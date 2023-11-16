@@ -1,15 +1,9 @@
-import {useField} from "formik";
+import { useField } from "formik";
 import { Select, FormItem } from "formik-antd";
-
 
 const formItemLayout = { labelCol: { span: 5 }, labelAlign: "left" };
 
-
-export default function MySelect({
-  label,
-  datacyWaarde,
-  ...props
-}) {
+export default function MySelect({ label, datacyWaarde, ...props }) {
   const [field, meta] = useField(props);
 
   return (

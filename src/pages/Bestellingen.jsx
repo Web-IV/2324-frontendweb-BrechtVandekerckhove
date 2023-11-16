@@ -7,7 +7,7 @@ import { Typography, DatePicker, Button, Space, Table, Empty } from "antd";
 import { useState, useMemo } from "react";
 import dayjs from "dayjs";
 import MaaltijdenLijst from "../components/Maaltijden/MaaltijdenLijst";
-
+import Error from "../components/Error";
 const { Title } = Typography;
 
 function BestellingTabel({ bestellingen, onDelete }) {
@@ -54,7 +54,8 @@ export default function Bestellingen() {
   return (
     <>
       <Title>Bestellingen</Title>
-      <AsyncData loading={isLoading} error={error || deleteError}>
+   
+      <AsyncData loading={isLoading} error={error}>
         {!error ? (
           <>
             {bestellingen.length === 0 ? (
@@ -69,10 +70,13 @@ export default function Bestellingen() {
                 }}
               />
             ) : (
-              <BestellingTabel
-                bestellingen={bestellingen}
-                onDelete={deleteBestelling}
-              />
+              <Space direction="horizontal">
+                <BestellingTabel
+                  bestellingen={bestellingen}
+                  onDelete={deleteBestelling}
+                />
+              <Error error={deleteError}/>
+              </Space>
             )}
             <Title level={2}>Zoek maaltijd op leverdatum</Title>
             <Space size="middle">

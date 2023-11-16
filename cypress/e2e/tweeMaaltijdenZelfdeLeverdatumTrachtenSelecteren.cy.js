@@ -5,7 +5,7 @@ describe("twee maaltijden toevoegen, tweede zelfde leverdatum selecteren als eer
     cy.login("brecht.vandekerckhove@student.hogent.be", "12345678");
   });
  
-  it("fout bij selecteren zelfde leverdatum", () => {
+  it("lukt niet selecteren zelfde leverdatum", () => {
     cy.visit("http://localhost:5173/");
 
     //eerste maaltijd toevoegen

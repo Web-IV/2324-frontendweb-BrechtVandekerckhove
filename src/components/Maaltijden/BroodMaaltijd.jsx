@@ -1,7 +1,6 @@
 import { dateConverter } from "../Bestellingen/Bestelling";
 
 export default function BroodMaaltijd({
-  id,
   soep,
   dessert,
   typeSandwiches,
@@ -9,26 +8,32 @@ export default function BroodMaaltijd({
   zoetBeleg,
   vetstof,
   leverdatum,
-  leverplaatsId,
   leverplaats,
-  bestellingsnr,
 }) {
   return (
     <table data-cy="broodMaaltijd">
       <thead style={{ textAlign: "left" }}>
         <tr>
-          <th data-cy="broodMaaltijd_leverdatum_typeMaaltijd">{dateConverter(leverdatum)}: broodmaaltijd</th>
+          <th data-cy="broodMaaltijd_leverdatum_typeMaaltijd">
+            {dateConverter(leverdatum)}: broodmaaltijd
+          </th>
         </tr>
         <tr>
-          <td data-cy="broodMaaltijd_leverplaats">Leverplaats: {leverplaats}</td>
+          <td data-cy="broodMaaltijd_leverplaats">
+            Leverplaats: {leverplaats}
+          </td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td data-cy="broodMaaltijd_sandwiches">Sandwiches: {typeSandwiches}</td>
+          <td data-cy="broodMaaltijd_sandwiches">
+            Sandwiches: {typeSandwiches}
+          </td>
         </tr>
         <tr>
-          <td data-cy="broodMaaltijd_hartigBeleg">Hartig beleg: {hartigBeleg}</td>
+          <td data-cy="broodMaaltijd_hartigBeleg">
+            Hartig beleg: {hartigBeleg}
+          </td>
         </tr>
         <tr>
           <td data-cy="broodMaaltijd_zoetBeleg">Zoet beleg: {zoetBeleg}</td>

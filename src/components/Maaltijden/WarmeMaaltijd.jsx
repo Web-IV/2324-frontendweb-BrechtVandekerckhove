@@ -1,17 +1,13 @@
 import { dateConverter } from "../Bestellingen/Bestelling";
-import dayjs from "dayjs";
+
 
 export default function WarmeMaaltijd({
-  id,
   hoofdschotel,
   soep,
   dessert,
   leverdatum,
-  leverplaatsId,
   leverplaats,
-  suggestieVanDeMaandId,
   suggestieVanDeMaandOmschrijving,
-  bestellingsnr,
 }) {
 
   return (
