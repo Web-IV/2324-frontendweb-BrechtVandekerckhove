@@ -3,7 +3,6 @@ import { Alert } from "antd";
 
 export default function Error({ error }) {
   if (isAxiosError(error)) {
-    console.log(error);
     return (
       <Alert
         data-cy="error"

@@ -45,6 +45,7 @@ export default function Login() {
   );
 
   return (
+
     <>
       <Title level={1} style={{textAlign:"center"}}>Inloggen</Title>
       <Formik

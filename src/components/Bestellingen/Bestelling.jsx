@@ -18,7 +18,6 @@ export default function Bestelling({
   besteldatum,
   maaltijden,
   onDelete,
-  error
 }) {
   const handleDelete = useCallback(() => {
     onDelete(bestellingsnr);
