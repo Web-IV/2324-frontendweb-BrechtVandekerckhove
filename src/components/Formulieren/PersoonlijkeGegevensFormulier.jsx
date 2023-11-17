@@ -4,7 +4,7 @@ import { Input, SubmitButton, FormItem, Select } from "formik-antd";
 import { Button } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MEDEWERKER_ID_KEY } from "../../contexts/Auth.context";
 import useSWRMutation from "swr/mutation";
 import { update } from "../../api";
@@ -37,8 +37,8 @@ export default function PersoonlijkeGegevensFormulier({
     ([url, id], data) => update(url, id, data)
   );
 
-  const history = useHistory();
-  const handleAnnuleerClick = () => {history.push("/");}
+  const navigate = useNavigate();
+  const handleAnnuleerClick = () => {navigate("/")}
   const [messageApi, contextHolder] = message.useMessage();
   const showConfirmation = () => {
     messageApi.open({
