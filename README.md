@@ -16,12 +16,29 @@ Ik verwacht dat volgende software reeds geïnstalleerd is:
 - [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
 - ...
 
-> Vul eventueel aan
+Voor gebruikers van [Chocolatey](https://chocolatey.org/):
+```powershell
+choco install nodejs -y
+choco install yarn -y
+choco install mysql -y
+choco install mysql.workbench -y
+```
 
 ## Opstarten
 
-> Schrijf hier hoe we de applicatie starten (.env bestanden aanmaken, commando's om uit te voeren...)
+Installeer alle dependencies:  
+`yarn install`  
+Maak een .env bestand met volgende inhoud:  
+`VITE_API_URL=http://localhost:9000/api`  
+Start de app:  
+`yarn dev`
 
 ## Testen
 
-> Schrijf hier hoe we de testen uitvoeren (.env bestanden aanmaken, commando's om uit te voeren...)
+- Open Cypress met volgend commando:  
+`yarn cypress open`  
+- Kies voor E2E Testing  
+- Kies een browser naar keuze 
+- Run de test naar keuze
+
+
