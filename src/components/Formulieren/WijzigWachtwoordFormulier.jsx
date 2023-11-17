@@ -121,7 +121,7 @@ export default function WijzigWachtwoordFormulier() {
             >
               Opslaan
             </SubmitButton>    
-            <Button onClick={handleAnnuleerClick} "className="form-button formMargin">
+            <Button onClick={handleAnnuleerClick} className="form-button formMargin">
          Annuleren
             </Button>
           </div>
