@@ -38,7 +38,7 @@ export default function WijzigWachtwoordFormulier() {
   const [messageApi, contextHolder] = message.useMessage();
 
   const history = useHistory();
-  const handleAnnuleerClick = () {history.push("/");}
+  const handleAnnuleerClick = () => {history.push("/");}
   
   const showConfirmation = () => {
     messageApi.open({
