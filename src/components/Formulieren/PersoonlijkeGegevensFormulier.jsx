@@ -144,9 +144,10 @@ export default function PersoonlijkeGegevensFormulier({
             >
               Opslaan
             </SubmitButton>
+                     <Link to="/">
             <Button className="form-button formMargin">
-              <Link to="/">Annuleren</Link>
-            </Button>
+     Annuleren
+            </Button></Link>
           </div>
           <Error error={error} />
           {contextHolder}
