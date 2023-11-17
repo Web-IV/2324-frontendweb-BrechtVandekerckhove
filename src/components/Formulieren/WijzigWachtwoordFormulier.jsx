@@ -116,10 +116,10 @@ export default function WijzigWachtwoordFormulier() {
               className="form-button blue formMargin"
             >
               Opslaan
-            </SubmitButton>
+            </SubmitButton>     <Link to="/">
             <Button className="form-button formMargin">
-              <Link to="/">Annuleren</Link>
-            </Button>
+         Annuleren
+            </Button></Link>
           </div>
           <Error error={error} />
           {contextHolder}
