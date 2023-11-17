@@ -4,7 +4,7 @@ import { Input, SubmitButton, FormItem } from "formik-antd";
 import { Button } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import useSWRMutation from "swr/mutation";
 import { update } from "../../api";
 import Error from "../Error";
@@ -36,6 +36,10 @@ export default function WijzigWachtwoordFormulier() {
   );
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  const history = useHistory();
+  const handleAnnuleerClick = () {history.push("/");}
+  
   const showConfirmation = () => {
     messageApi.open({
       type: "success",
@@ -116,10 +120,10 @@ export default function WijzigWachtwoordFormulier() {
               className="form-button blue formMargin"
             >
               Opslaan
-            </SubmitButton>     <Link to="/">
-            <Button className="form-button formMargin">
+            </SubmitButton>    
+            <Button onClick={handleAnnuleerClick} "className="form-button formMargin">
          Annuleren
-            </Button></Link>
+            </Button>
           </div>
           <Error error={error} />
           {contextHolder}
