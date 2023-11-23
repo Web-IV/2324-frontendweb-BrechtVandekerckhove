@@ -1,5 +1,5 @@
 import Maaltijd from "../Maaltijden/Maaltijd";
-import { useCallback } from "react";
+import { useCallback,memo } from "react";
 import { Button, Modal, Table, Space } from "antd";
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
@@ -13,7 +13,7 @@ export const dateConverter = (date) => {
   return date.toLocaleDateString();
 };
 
-export default function Bestelling({
+export default memo(function Bestelling({
   bestellingsnr,
   besteldatum,
   maaltijden,
@@ -92,4 +92,4 @@ export default function Bestelling({
       
     </div>
   );
-};
+});

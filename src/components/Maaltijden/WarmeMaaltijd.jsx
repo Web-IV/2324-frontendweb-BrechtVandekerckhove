@@ -1,7 +1,8 @@
 import { dateConverter } from "../Bestellingen/Bestelling";
+import { memo } from 'react';
 
 
-export default function WarmeMaaltijd({
+export default memo(function WarmeMaaltijd({
   hoofdschotel,
   soep,
   dessert,
@@ -40,4 +41,4 @@ export default function WarmeMaaltijd({
       </tbody>
     </table>
   );
-}
+});

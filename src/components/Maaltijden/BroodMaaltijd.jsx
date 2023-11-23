@@ -1,6 +1,7 @@
 import { dateConverter } from "../Bestellingen/Bestelling";
+import { memo } from "react";
 
-export default function BroodMaaltijd({
+export default memo(function BroodMaaltijd({
   soep,
   dessert,
   typeSandwiches,
@@ -50,4 +51,4 @@ export default function BroodMaaltijd({
       </tbody>
     </table>
   );
-}
+});

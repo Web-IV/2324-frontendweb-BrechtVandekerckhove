@@ -1,4 +1,6 @@
-export default function SuggestieVanDeMaand({
+import { memo } from 'react';
+
+export default memo(function SuggestieVanDeMaand({
   maand,
   vegie,
   omschrijving,
@@ -24,4 +26,4 @@ export default function SuggestieVanDeMaand({
       {omschrijving}
     </p>
   );
-}
+});

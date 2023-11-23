@@ -1,7 +1,8 @@
 import BroodMaaltijd from "./BroodMaaltijd";
 import WarmeMaaltijd from "./WarmeMaaltijd";
+import { memo } from 'react';
 
-export default function Maaltijd({
+export default memo( function Maaltijd({
   id,
   type,
   leverdatum,
@@ -52,3 +53,4 @@ export default function Maaltijd({
      
   );
 }
+);
