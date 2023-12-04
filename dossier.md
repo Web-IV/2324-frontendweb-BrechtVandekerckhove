@@ -252,9 +252,7 @@ De database wordt online opgebouwd door in render als build command `yarn prisma
 - maaltijdBewerkenInWinkelmandje:  
 maaltijd toevoegen in winkelmandje, bewerken in winkelmandje, bewerking ok  
 - maaltijdToevoegenZonderLeverdatum:  
- maaltijd toevoegen zonder leverdatum: foutboodschap en niet toegevoegd aan winkelmandje  
-- maaltijdToevoegenZonderLeverplaats:  
-maaltijd toevoegen zonder leverplaats: foutboodschap en niet toegevoegd aan winkelmandje  
+ maaltijd toevoegen zonder leverdatum: foutboodschap en niet toegevoegd aan winkelmandje   
 - tweeMaaltijdenZelfdeLeverdatumTrachtenSelecteren:  
   twee maaltijden met zelfde leverdatum selecteren is onmogelijk  
 - voegBroodMaaltijdToeAanWinkelmandjeEnVerwijder:  
