@@ -124,10 +124,8 @@ export default function Winkelmandje() {
             className="blue"
             type="primary"
             disabled={!maaltijden}
-            //medewerkerId hier nog hard gecodeerd
             onClick={async () => {
               await saveBestelling({
-                //medewerkerId: 1,
                 maaltijden: maaltijden,
               });
               localStorage.removeItem("maaltijden");
