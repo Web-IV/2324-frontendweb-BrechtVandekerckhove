@@ -22,7 +22,7 @@ export default memo(function Bestelling({
   const handleDelete = useCallback(() => {
     onDelete(bestellingsnr);
   }, [bestellingsnr, onDelete]);
-
+  console.log("render bestelling");
   const showDeleteConfirm = useCallback(() => {
     confirm({
       title: "Ben je zeker dat je deze bestelling wilt verwijderen?",

@@ -10,7 +10,6 @@ export default memo(function WarmeMaaltijd({
   leverplaats,
   suggestieVanDeMaandOmschrijving,
 }) {
-
   return (
     <table data-cy="warmeMaaltijd">
       <thead style={{ textAlign: "left" }}>

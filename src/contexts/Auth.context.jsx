@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     api.setAuthToken(token);
     setIsAuthed(Boolean(token));
-
     setReady(true);
   }, [token]);
 

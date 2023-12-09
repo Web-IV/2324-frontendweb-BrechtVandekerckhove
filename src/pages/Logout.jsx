@@ -9,6 +9,7 @@ export default function Logout() {
   useEffect(() => {
     logout();
   }, [logout]);
+  
   if (isAuthed) {
     return <Loader message="Uitloggen" />;
   }

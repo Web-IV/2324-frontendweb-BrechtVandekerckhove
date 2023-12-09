@@ -22,7 +22,7 @@ const maandNummerOmzettenNaarMaandString = (maandNummer) => {
 };
 
 export default function SuggestieLijst({suggesties, isLoading, error}) {
- 
+  console.log('render suggestielijst');
   return (
     <>
       <Title level={2}>Suggesties komende maanden:</Title>

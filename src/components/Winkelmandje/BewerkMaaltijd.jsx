@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Typography, Button, Space } from "antd";
 import BroodMaaltijdFormulier from "../Formulieren/BroodMaaltijdFormulier";
 import WarmeMaaltijdFormulier from "../Formulieren/WarmeMaaltijdFormulier";
@@ -29,8 +29,13 @@ export default function BewerkMaaltijd() {
       localStorage.setItem("maaltijden", JSON.stringify(bestaandeMaaltijden));
       navigate("/winkelmandje", { replace: true });
     };
+    const handleClick = useCallback(() => {
+      setWarmeMaaltijdFormulier(!warmeMaaltijdFormulier);
+    },[warmeMaaltijdFormulier]);
+ 
 
     return (
+ 
       <>
         <Title level={2}>Bewerk maaltijd</Title>
         <p>Maaltijden kunnen tot 10u de dag ervoor besteld worden. </p>
@@ -38,14 +43,14 @@ export default function BewerkMaaltijd() {
           <Button
             type="primary"
             className={warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
-            onClick={() => setWarmeMaaltijdFormulier(true)}
+            onClick={handleClick}
           >
             Warme maaltijd
           </Button>
           <Button
             type="primary"
             className={!warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
-            onClick={() => setWarmeMaaltijdFormulier(false)}
+            onClick={handleClick}
           >
             Broodmaaltijd
           </Button>

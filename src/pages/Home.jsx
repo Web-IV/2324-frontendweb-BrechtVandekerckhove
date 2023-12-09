@@ -1,6 +1,6 @@
 import SuggestieLijst from "../components/Suggesties/SuggestieLijst";
 import { Button, Space } from "antd";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import BroodMaaltijdFormulier from "../components/Formulieren/BroodMaaltijdFormulier";
 import WarmeMaaltijdFormulier from "../components/Formulieren/WarmeMaaltijdFormulier";
 import { Typography } from "antd";
@@ -51,6 +51,11 @@ export default function VoegMaaltijdToe() {
     }
     return maaltijd;
   };
+  const handleClick = useCallback(() => {
+    setWarmeMaaltijdFormulier(!warmeMaaltijdFormulier);
+  },[warmeMaaltijdFormulier]);
+
+  
   return (
     <>
       <Title level={1}>Maaltijdkeuze</Title>
@@ -65,7 +70,7 @@ export default function VoegMaaltijdToe() {
         <Button
           type="primary"
           data-cy="btn_warmeMaaltijd"
-          onClick={() => setWarmeMaaltijdFormulier(true)}
+          onClick={handleClick}
           className={warmeMaaltijdFormulier ? "blue" : "blue nonActiveButton"}
           style={{ width: "150px" }}
         >
@@ -74,7 +79,7 @@ export default function VoegMaaltijdToe() {
         <Button
           type="primary"
           data-cy="btn_broodMaaltijd"
-          onClick={() => setWarmeMaaltijdFormulier(false)}
+          onClick={handleClick}
           className={!warmeMaaltijdFormulier ? "blue " : "blue nonActiveButton"}
           style={{ width: "150px" }}
         >
